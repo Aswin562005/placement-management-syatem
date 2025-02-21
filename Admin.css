@@ -12,12 +12,24 @@ html {
 
 body {
 
-  background-image: url('AMRITA-01.jpg');
+  background-image: url('nmssvn3.jpeg');
 	background-repeat: no-repeat;
   background-attachment: fixed;  
   background-size: 100% 100%;
 	/*background:#aad0f1;*/
   font-family: "Poppins", sans-serif;
+}
+body::after{
+  content: '';
+  position: fixed;
+  /* top: 0; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0d0d0d;
+  z-index: -1;
+  opacity: 0.3;
 }
 
 .grid {
@@ -33,14 +45,14 @@ body {
   background-color: rgb(146, 21, 17);
   border-radius: 0.4rem;
   overflow: hidden;
-  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1); */
   cursor: pointer;
   transition: 0.2s;
 }
 
 .grid-item:hover {
   transform: translateY(-0.5%);
-  box-shadow: 0 4rem 8rem rgb(146, 21, 17);
+  /* box-shadow: 0 4rem 8rem rgb(146, 21, 17); */
 }
 
 .card-img {

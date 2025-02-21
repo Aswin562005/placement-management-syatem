@@ -1,5 +1,5 @@
 html{
-    background:url("AMRITA-01.jpg") no-repeat;
+    background:url("nmssvn3.jpeg") no-repeat;
     background-size: cover;
     height:100%;
     background-color: #000;
@@ -18,6 +18,18 @@ html{
  body {
     color: #C0C0C0;
     font-family: Arial, san-serif;
+ }
+ body::after{
+   content: '';
+   position: fixed;
+   /* top: 0; */
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 100%;
+   background-color: #0d0d0d;
+   z-index: -1;
+   opacity: 0.3;
  }
  
  
