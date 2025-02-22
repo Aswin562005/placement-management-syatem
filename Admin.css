@@ -42,7 +42,7 @@ body::after{
 }
 
 .grid-item {
-  background-color: rgb(146, 21, 17);
+  background-color:  #191970;
   border-radius: 0.4rem;
   overflow: hidden;
   /* box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1); */
@@ -111,3 +111,10 @@ body::after{
   margin-left: 1.5rem;
 }
 
+.card-content a{
+  text-decoration: none;
+}
+
+
+
+  
