@@ -1,5 +1,10 @@
 <?php 
 session_start();
+if (!isset($_SESSION['user_rollno'])) {
+    // Handle the error, e.g., redirect to login page
+    header("Location: login.html");
+    exit();
+}
 $std_roll = $_SESSION['user_rollno'];
 include_once 'connect.php';
 $query = "select * from student;";
@@ -20,7 +25,7 @@ $std_result = mysqli_query($conn,$query);
     <?php
         $html = "<table class='htmltable'>";
 
-        $html.="<tr> <th>Roll No</th> <th>Name</th> <th>CGPA</th> <th>Achievement</th> <th>Technical Skills</th> <th>Area of Interest</th> <th>DOB</th> <th>Email_id</th> <th>Phone no</th> <th>Batch</th> <th>Eligibility</th>  <th>No of Courses/Reserach Papers</th> <th>Department/Specialisation</th> </tr>";
+        $html.="<tr> <th>Roll No</th>  <th>Email_id</th> <th>Name</th> <th>Phone no</th> <th>CGPA</th> <th>DOB</th> <th>Technical Skills</th> <th>Achievement</th> <th>Area of Interest</th> <th>Batch</th> <th>Eligibility</th>  <th>No of Courses/Reserach Papers</th> <th>Department/Specialisation</th> </tr>";
 
         while($row = mysqli_fetch_row($std_result))
         {

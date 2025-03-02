@@ -10,15 +10,14 @@ $std_result = mysqli_query($conn,$query);
 
 $row = mysqli_fetch_row($std_result);
 
-$std_name = $row[1];
-$std_cgpa = $row[2];
-$std_achievement = $row[3];
-$std_technical_skills = $row[4];
-$std_area_of_interest = $row[5];
-$std_dob = $row[6];
-$std_email_id = $row[7];
-$std_phone_no = $row[8];
-
+$std_name = $row[2];
+$std_cgpa = $row[4];
+$std_achievement = $row[7];
+$std_technical_skills = $row[6];
+$std_area_of_interest = $row[8];
+$std_dob = $row[5];
+$std_email_id = $row[1];
+$std_phone_no = $row[3];
 
 $query1 = "select std_eligibility from stu_eligibility where std_rollno='".$std_roll."';";
 $eligibility = mysqli_query($conn,$query1);

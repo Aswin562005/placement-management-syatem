@@ -2,12 +2,12 @@
 session_start();
 include_once 'connect.php';
 
-$update = "call avg_check()";
+// $update = "call avg_check()";
 
 
-$query = "select * from Report;";
+$query = "SELECT r.cmp_id, c.cmp_name, r.attendees, r.recruited, r.job_title, r.average_package from cmp_details as c join report as r on c.cmp_id = r.cmp_id;";
 
-$temp2 = mysqli_query($conn,$update);
+// $temp2 = mysqli_query($conn,$update);
 
 $fty_result = mysqli_query($conn,$query);
 ?>
@@ -24,12 +24,12 @@ $fty_result = mysqli_query($conn,$query);
     <?php
         $html = "<table class='htmltable'>";
 
-        $html.="<tr> <th>Company ID</th> <th>Company name</th> <th>Attendees</th> <th>Recruited</th> <th>Offers Made</th> <th>Average Package</th> <th>Highest Package</th> </tr>";
+        $html.="<tr> <th>Company ID</th> <th>Company name</th> <th>Attendees</th> <th>Recruited</th> <th>Job Title</th> <th>Average Package</th> </tr>";
 
         while($row = mysqli_fetch_row($fty_result))
         {
             $html.="<tr>";
-            for($x = 0;$x<7;$x++)
+            for($x = 0;$x<6;$x++)
             { $html .= "<td>" . $row[$x] . "</td>"; }
             $html .= "</tr>";
         }

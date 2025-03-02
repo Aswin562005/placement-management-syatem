@@ -19,9 +19,9 @@ $cmp_emailid = "";
     <link rel="stylesheet" href="Edit_company.css">
 </head>
 <body>
-<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);margin-top: -5px">Placement Management System</h1><br><br>
-    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
-    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
+<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: #191970;margin-top: -5px; padding: 10px 0;">Placement Management System</h1><br><br>
+    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white; text-decoration: none;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
+    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white; text-decoration: none;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
 <div id="contact-form">
     <div>
       <h1 style="text-align: center">Company Details</h1> 
@@ -104,29 +104,29 @@ $cmp_emailid = "";
 
         <div>
             <label for="phno">
-              <span class="required">Company's Phone No: *</span> 
+              <span class="required">Company's Phone No : *</span> 
               <input type="text" id="phno" name="cmp_phno" value="<?php echo $cmp_phoneno ?>" placeholder="Company's Phone No" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>
 
         <div>
             <label for="email_cmp">
-              <span class="required">Company's Email ID: *</span> 
+              <span class="required">Company's Email ID : *</span> 
               <input type="text" id="email_cmp" name="cmp_emailid" value="<?php echo $cmp_emailid ?>" placeholder="Company's Email id" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>
 
         <div>
             <label for="cm_eligible">
-              <span class="required">Company's eligiblity Criteria (place a ; between Company's eligiblity Criteria): *</span> 
+              <span class="required">Company's eligiblity Criteria : *</span> 
               <input type="text" id="cm_eligible" name="cmp_eligibility_" value="<?php echo $cmp_eligible ?>" placeholder="Company's Eligibility Criteria" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>  
 
         <div>
             <label for="cm_date">
-              <span class="required">Company's Date Of Visit: Format(yyyy-mm-dd) (place a ; between Company's date of visit): *</span> 
-              <input type="text" id="cm_date" name="cmp_date_" value="<?php echo $cmp_date_of_visit ?>" placeholder="Company's Date of Visit" required="required" tabindex="1" autofocus="autofocus" />
+              <span class="required">Company's Date Of Visit: Format(yyyy-mm-dd) : *</span> 
+              <input type="date" id="cm_date" name="cmp_date_" value="<?php echo $cmp_date_of_visit ?>" placeholder="Company's Date of Visit" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>  
 

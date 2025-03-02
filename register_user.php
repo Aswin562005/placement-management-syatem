@@ -4,9 +4,9 @@ if(isset($_POST['signup_user']))
 {    
      $email_id = $_POST['register_email'];
      $password_ = $_POST['register_password'];
-     $usertype = $_POST['reg_usertype'];
+   //   $usertype = $_POST['reg_usertype'];
      $sql = "INSERT INTO login (email_id,password_,type_of_user)
-     VALUES ('$email_id','$password_','$usertype')";
+     VALUES ('$email_id','$password_','Student')";
      if (mysqli_query($conn, $sql)) 
      {
         echo '<script type="text/javascript">

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include_once 'connect.php';
-$query = "select * from feedback;";
+$query = "SELECT cd.cmp_name, f.message, f.student_knowledge_ratings, f.student_behaviour_ratings, f.overall_ratings from feedback as f  join cmp_details as cd on cd.cmp_id = f.company_id;";
 $feed_result = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -17,12 +17,12 @@ $feed_result = mysqli_query($conn,$query);
     <?php
         $html = "<table class='htmltable'>";
 
-        $html.="<tr> <th>Feedback ID</th> <th>Company ID</th> <th>Feedback Message</th> <th>Student Knowledge</th> <th>Student Behaviour</th> <th>Overall Rating</th> </tr>";
+        $html.="<tr><th>Company Name</th> <th>Feedback Message</th> <th>Student Knowledge</th> <th>Student Behaviour</th> <th>Overall Rating</th> </tr>";
 
         while($row = mysqli_fetch_row($feed_result))
         {
             $html.="<tr>";
-            for($x = 0;$x<6;$x++)
+            for($x = 0;$x<5;$x++)
             { $html .= "<td>" . $row[$x] . "</td>"; }
             $html .= "</tr>";
         }

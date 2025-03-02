@@ -11,8 +11,8 @@ $fcl_result = mysqli_query($conn,$query);
 $row = mysqli_fetch_row($fcl_result);
 
 $fcl_name = $row[1];
-$fcl_email = $row[2];
-$fcl_phone_no = $row[3];
+$fcl_phone_no = $row[2];
+$fcl_email = $row[3];
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +44,13 @@ $fcl_phone_no = $row[3];
             </label> 
         </div>
 
+        <div>
+            <label for="fcl_email">
+              <span class="required">Email: </span>
+              <input type="email" id="fcl_email" name="fcl_email" value="<?php echo $fcl_email ?>" placeholder="Your Email" tabindex="2" required="required" />
+              </label> 
+        </div>
+
         <div>              
             <button name="submitedit" type="submit" id="submit" >Update Table</button> 
         </div>
@@ -55,8 +62,9 @@ $fcl_phone_no = $row[3];
     {
         $dbusername = $_POST['user_name'];
         $dbphone = $_POST['fcl_phone_no'];
+        $dbemail = $_POST['fcl_email'];
 
-        $update = "UPDATE FACULTY SET FACULTY_NAME ='".$dbusername."',FACULTY_PHONE_NO ='".$dbphone."' WHERE FACULTY_ID = '".$faculty_id."';";
+        $update = "UPDATE FACULTY SET FACULTY_NAME ='".$dbusername."',FACULTY_PHONE_NO ='".$dbphone."',FACULTY_EMAIL_ID ='".$dbemail."' WHERE FACULTY_ID = '".$faculty_id."';";
 
         if (mysqli_query($conn,$update)) 
         {

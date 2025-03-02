@@ -24,7 +24,7 @@ $std_benefits = $row[6];
     <link rel="stylesheet" href="student_placement_details.css">
 </head>
 <body>
-<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);margin-top: -5px">Placement Management System</h1><br><br>
+<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color:  #191970;margin-top: -5px">Placement Management System</h1><br><br>
     <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Student.php" style="color: white;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
     <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
 <div id="contact-form">
@@ -36,14 +36,14 @@ $std_benefits = $row[6];
         <div>
             <label for="username">
               <span class="required">Name: *</span> 
-              <input type="text" id="username" name="user_name" value = "<?php echo $std_name ?>" placeholder="Your Name" required="required" tabindex="1" autofocus="autofocus" />
+              <input type="text" id="username" name="user_name" value = "<?php echo $std_name ?>" placeholder="Your Name" required="required" tabindex="1" autofocus="autofocus" disabled />
             </label> 
         </div>
 
         <div>
             <label for="Placed_">
             <span class="required">Placed?(yes/no): </span>     
-        <input list="placed__" name="std_placed" placeholder="Type of user" value="<?php echo $std_placed ?>">
+        <input list="placed__" name="std_placed" placeholder="Type of user" value="<?php echo $std_placed ?>" disabled>
         <datalist id="placed__">
           <option value="yes">
           <option value="no">
@@ -54,34 +54,34 @@ $std_benefits = $row[6];
         <div>
             <label for="placed_id">
               <span class="required">Placed Company Id: </span> 
-              <input type="text" id="placed_id" name="user_placed_id" value="<?php echo $std_cmp_id ?>" placeholder="Enter the Id of your placed company id" tabindex="1" autofocus="autofocus" />
+              <input type="text" id="placed_id" name="user_placed_id" value="<?php echo $std_cmp_id ?>" placeholder="Enter the Id of your placed company id" tabindex="1" autofocus="autofocus" disabled />
             </label> 
         </div>
 
         <div>
             <label for="std_salary">
               <span class="required">Salary Package (Enter CTC): </span> 
-              <input type="text" id="std_salary" name="user_salary" value="<?php echo $std_salary ?>" tabindex="1" autofocus="autofocus" />
+              <input type="text" id="std_salary" name="user_salary" value="<?php echo $std_salary ?>" tabindex="1" autofocus="autofocus" disabled />
             </label> 
         </div>
 
         <div>
             <label for="stu_job_desc">
               <span class="required">Job Description: </span> 
-              <input type="text" id="stu_job_desc" name="std_job_description" value="<?php echo $std_job_desc ?>" placeholder="Enter your Job Description" tabindex="1" autofocus="autofocus" />
+              <input type="text" id="stu_job_desc" name="std_job_description" value="<?php echo $std_job_desc ?>" placeholder="Enter your Job Description" tabindex="1" autofocus="autofocus" disabled />
             </label> 
         </div>  
 
         <div>
             <label for="stu_benefits">
               <span class="required">Job Benefits: </span> 
-              <input type="text" id="stu_benefits" name="std_benefits" value="<?php echo $std_benefits ?>" placeholder="Your Job Benefits" tabindex="1" autofocus="autofocus" />
+              <input type="text" id="stu_benefits" name="std_benefits" value="<?php echo $std_benefits ?>" placeholder="Your Job Benefits" tabindex="1" autofocus="autofocus" disabled />
             </label> 
         </div> 
 
-        <div>              
+        <!-- <div>              
             <button name="submitedit" type="submit" id="submit" >Update Table</button> 
-        </div>
+        </div> -->
          </form>
     </div>
 

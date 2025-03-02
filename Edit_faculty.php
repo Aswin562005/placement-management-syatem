@@ -15,9 +15,9 @@ $fcl_phone_no = null;
     <link rel="stylesheet" href="Edit_student.css">
 </head>
 <body>
-<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);margin-top: -5px">Placement Management System</h1><br><br>
-    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
-    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
+<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: #191970;margin-top: -5px ;padding: 10px 0;">Placement Management System</h1><br><br>
+    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white; text-decoration:none" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
+    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white; text-decoration: none;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
 <div id="contact-form">
 
         <div class="filter_search">
@@ -41,8 +41,8 @@ $fcl_phone_no = null;
     $row = mysqli_fetch_row($fcl_result);
 
     $fcl_name = $row[1];
-    $fcl_email = $row[2];
-    $fcl_phone_no = $row[3];
+    $fcl_phone_no = $row[2];
+    $fcl_email = $row[3];
     }
 
     ?>
@@ -66,6 +66,13 @@ $fcl_phone_no = null;
             </label> 
         </div>
 
+        <div>
+            <label for="fcl_emailid">
+              <span class="required">Email ID: </span>
+              <input type="text" id="fcl_emailid" name="fcl_email_id" value="<?php echo $fcl_email ?>" placeholder="Your Email ID" tabindex="1" autofocus="autofocus" />
+            </label> 
+        </div>
+
         <input type="hidden" value="<?php echo $faculty_id ?>" name="pass_fclid">
 
         <div>              
@@ -80,8 +87,9 @@ $fcl_phone_no = null;
         $faculty_id = $_POST['pass_fclid'];
         $dbusername = $_POST['user_name'];
         $dbphone = $_POST['fcl_phone_no'];
+        $dbemail = $_POST['fcl_email_id'];
 
-        $update = "UPDATE FACULTY SET FACULTY_NAME ='".$dbusername."',FACULTY_PHONE_NO ='".$dbphone."' WHERE FACULTY_ID = '".$faculty_id."';";
+        $update = "UPDATE FACULTY SET FACULTY_NAME ='".$dbusername."',FACULTY_PHONE_NO ='".$dbphone."',FACULTY_EMAIL_ID ='".$dbemail."' WHERE FACULTY_ID = '".$faculty_id."';";
 
         if (mysqli_query($conn,$update)) 
         {

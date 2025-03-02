@@ -21,9 +21,9 @@ $std_roll = "";
     <link rel="stylesheet" href="Edit_student.css">
 </head>
 <body>
-<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);margin-top: -5px">Placement Management System</h1><br><br>
-    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
-    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
+<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: #191970;margin-top: -5px;padding: 10px 0;">Placement Management System</h1><br><br>
+    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white; text-decoration: none;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
+    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white; text-decoration: none;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
 <div id="contact-form">
     <div>
       <h1 style="text-align: center">Student Personal Details</h1> 
@@ -50,14 +50,14 @@ $std_roll = "";
 
             $row = mysqli_fetch_row($std_result);
 
-            $std_name = $row[1];
-            $std_cgpa = $row[2];
-            $std_achievement = $row[3];
-            $std_technical_skills = $row[4];
-            $std_area_of_interest = $row[5];
-            $std_dob = $row[6];
-            $std_email_id = $row[7];
-            $std_phone_no = $row[8];
+            $std_name = $row[2];
+            $std_cgpa = $row[4];
+            $std_achievement = $row[7];
+            $std_technical_skills = $row[6];
+            $std_area_of_interest = $row[8];
+            $std_dob = $row[5];
+            $std_email_id = $row[1];
+            $std_phone_no = $row[3];
             $query1 = "select std_eligibility from stu_eligibility where std_rollno='".$std_roll."';";
             $eligibility = mysqli_query($conn,$query1);
 
@@ -146,7 +146,7 @@ $std_roll = "";
 
         <div>
             <label for="stu_eligible">
-              <span class="required">Student's eligiblities (place a ; between Student's eligibilities): *</span> 
+              <span class="required">Student's eligiblities : *</span> 
               <input type="text" id="stu_eligible" name="std_eligibility_" value="<?php echo $stud_eligible ?>" placeholder="Student's Eligibility" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>  

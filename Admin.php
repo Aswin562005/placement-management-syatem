@@ -20,8 +20,10 @@ $_SESSION['user_id'] = $admin_id;
   </head>
 
   <body>
-    <h1 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);">Placement Management System</h1><br><br>
-    <div style="text-align: right;margin-top: -70px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
+    <!-- <h1 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);">Placement Management System</h1><br><br> -->
+    <?php include 'navbar.php' ?>
+    
+    <div class="logout"style="text-align: right;margin-top: -50px;margin-right: 40px;font-size: 20px;font-weight: bold;color: white;"><a href="login.html" style="color: white; text-decoration: none;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
     <div class="grid" style="margin-top: 70px;">
       <div class="grid-item">
         <div class="card">
@@ -80,6 +82,6 @@ $_SESSION['user_id'] = $admin_id;
       </div>
       </div>
     
-    
+      <?php include 'footer.php' ?>
   </body>
 </html>

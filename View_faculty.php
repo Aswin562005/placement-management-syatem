@@ -17,7 +17,7 @@ $fty_result = mysqli_query($conn,$query);
     <?php
         $html = "<table class='htmltable'>";
 
-        $html.="<tr> <th>Faculty ID</th> <th>Name</th> <th>Email ID</th> <th>Phone no</th> </tr>";
+        $html.="<tr> <th>Faculty ID</th> <th>Name</th> <th>Phone no</th> <th>Email ID</th> </tr>";
 
         while($row = mysqli_fetch_row($fty_result))
         {

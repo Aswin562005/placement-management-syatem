@@ -5,6 +5,7 @@ include_once 'connect.php';
 $admin_name = null;
 $admin_phone_no = null;
 $admin_id = null;
+$admin_email = null; 
 
 ?>
 <!DOCTYPE html>
@@ -14,9 +15,9 @@ $admin_id = null;
     <link rel="stylesheet" href="Edit_student.css">
 </head>
 <body>
-<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: rgb(146, 21, 17);margin-top: -5px">Placement Management System</h1><br><br>
-    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
-    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
+<h2 style="text-align: center;font-family: cursive;font-size: 40px;color: rgb(241, 206, 7);background-color: #191970;margin-top: -5px; padding: 10px 0;">Placement Management System</h1><br><br>
+    <div style="text-align: right;margin-top: -110px;margin-right: 140px;font-size: 22px;font-weight: bold;color: white;"><a href="Admin.php" style="color: white; text-decoration: none;" onclick="window.alert('You will be navigated to dashboard')">Dashboard</a></div>
+    <div style="text-align: right;margin-top: -26px;margin-right: 40px;font-size: 22px;font-weight: bold;color: white;"><a href="login.html" style="color: white; text-decoration: none;" onclick="window.alert('You will be logged out of the system')">Logout</a></div>
 <div id="contact-form">
 
         <div class="filter_search">
@@ -38,8 +39,11 @@ $admin_id = null;
 
     $row = mysqli_fetch_row($fcl_result);
 
-    $admin_name = $row[1];
-    $admin_phone_no = $row[3];
+    $admin_email = $row[1];
+    $admin_phone_no = $row[2];
+    $admin_name = $row[3];
+
+    echo $admin_name,$admin_email,$admin_phone_no;
     }
 
     ?>
@@ -53,6 +57,13 @@ $admin_id = null;
             <label for="username">
               <span class="required">Name: *</span> 
               <input type="text" id="username" name="user_name" value = "<?php echo $admin_name ?>" placeholder="Your Name" required="required" tabindex="1" autofocus="autofocus" />
+            </label> 
+        </div>
+
+        <div>
+            <label for="email">
+              <span class="required">Email ID: *</span> 
+              <input type="email" id="email" name="email" value = "<?php echo $admin_email ?>" placeholder="Your Email Id" required="required" tabindex="1" autofocus="autofocus" />
             </label> 
         </div>
 
@@ -76,9 +87,10 @@ $admin_id = null;
     {
         $admin_id = $_POST['pass_admid'];
         $dbusername = $_POST['user_name'];
+        $dbemail = $_POST['email'];
         $dbphone = $_POST['fcl_phone_no'];
 
-        $update = "UPDATE ADMINISTRATOR SET ADMIN_NAME ='".$dbusername."',ADMIN_PHONE_NO ='".$dbphone."' WHERE ADMIN_ID = '".$admin_id."';";
+        $update = "UPDATE ADMINISTRATOR SET ADMIN_NAME ='".$dbusername."',ADMIN_PHONE_NO ='".$dbphone."',ADMIN_EMAIL_ID='".$dbemail."' WHERE ADMIN_ID = '".$admin_id."';";
 
         if (mysqli_query($conn,$update)) 
         {

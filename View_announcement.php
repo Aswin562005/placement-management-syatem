@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include_once 'connect.php';
-$query = "select * from Announcement;";
+$query = "SELECT a.admin_name, a.ADMIN_PHONE_NO, an.date_of_visit, an.message from announcement as an join administrator as a on an.admin_id = a.admin_id order by an.date_of_visit desc;";
 $fty_result = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ $fty_result = mysqli_query($conn,$query);
     <?php
         $html = "<table class='htmltable'>";
 
-        $html.="<tr> <th>Admin ID</th> <th>Admin Phone No</th> <th>Date of Announcement</th> <th>Announcement Description</th> </tr>";
+        $html.="<tr> <th>Admin Name</th> <th>Admin Phone No</th> <th>Date of Announcement</th> <th>Announcement Description</th> </tr>";
 
         while($row = mysqli_fetch_row($fty_result))
         {

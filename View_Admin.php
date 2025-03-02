@@ -22,8 +22,10 @@ $fty_result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_row($fty_result))
         {
             $html.="<tr>";
-            for($x = 0;$x<4;$x++)
-            { $html .= "<td>" . $row[$x] . "</td>"; }
+            $html .= "<td>" . $row[0] . "</td>"; 
+            $html .= "<td>" . $row[3] . "</td>"; 
+            $html .= "<td>" . $row[1] . "</td>";
+            $html .= "<td>" . $row[2] . "</td>";
             $html .= "</tr>";
         }
         $html .= "</table>";
