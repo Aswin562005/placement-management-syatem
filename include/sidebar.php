@@ -6,7 +6,6 @@
         <li><a href="/placementManagementSystem/student/student.php">Students</a></li>
         <li><a href="/placementManagementSystem/company/company.php">Companies</a></li>
         <li><a href="/placementManagementSystem/announcement/announcement.php">Announcements</a></li>
-        <li><a href="#">Jobs</a></li>
         <li><a href="#">Reports</a></li>
     </ul>
     <a href="#" class="logout">Logout</a>

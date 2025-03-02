@@ -1,16 +1,7 @@
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Companies - Placement Cell</title>
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-        <script src="../js/bootstrap/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../css/global.css" />
-        <link rel="stylesheet" href="../css/sidebar.css" />
-        <script src="../js/jquery-3.7.1.min.js"></script>
-    </head>
+    <?php $title='Companies'; include '../include/header.php' ?>
 <body>
     <?php include '../include/sidebar.php' ?>
     <?php include 'view_company.php'; ?>
