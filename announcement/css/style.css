@@ -1,0 +1,37 @@
+.announcement-card {
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.announcement-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.announcement-card:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+.announcement-header {
+    background-color: #1b4f72;
+    color: white;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+.announcement-body {
+    padding: 20px;
+    border: 1px solid #1b4f72;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: white;
+}
+.announcement-footer {
+    text-align: right;
+    padding: 10px;
+    border-top: 1px solid #1b4f72;
+    background-color: #f8f9fa;
+    border-radius: 0 0 5px 5px;
+}
+.announcement-footer button {
+    margin-left: 5px;
+}

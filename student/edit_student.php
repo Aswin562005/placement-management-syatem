@@ -68,16 +68,16 @@
                         <label class="form-label">UG or PG &nbsp;&nbsp;</label>
                         <label class="form-label">
                             <input type="radio" name="ug_or_pg" value="UG" class="form-radio" required>
-                            &nbsp;UG
+                            UG&nbsp;
                         </label>
                         <label class="form-label">
                             <input type="radio" name="ug_or_pg" value="PG" class="form-radio" required>
-                            &nbsp;PG
+                            PG
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <div id="editMessageBox" class="mt-2"></div>
+                    <!-- <div id="editMessageBox" class="mt-2"></div> -->
                 </form>
             </div>
         </div>

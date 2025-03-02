@@ -1,16 +1,16 @@
-<?php include 'db/config.php'; ?>
+<?php include '../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Placement Cell Dashboard</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
-    <?php include 'include/sidebar.php'; ?>
+    <?php include '../include/sidebar.php'; ?>
     <?php 
         $sql = "SELECT 
                     (SELECT COUNT(*) FROM company) AS total_companies, 
@@ -43,6 +43,6 @@
             </div>
         </div>
     </div>
-    <script src="js/global.js"></script>
+    <script src="../js/global.js"></script>
 </body>
 </html>

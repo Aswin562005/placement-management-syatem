@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .announcement-card {
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .announcement-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .announcement-card:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        .announcement-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+        }
+        .announcement-body {
+            padding: 20px;
+            border: 1px solid #007bff;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            background-color: white;
+        }
+        .announcement-footer {
+            text-align: right;
+            padding: 10px;
+            border-top: 1px solid #007bff;
+            background-color: #f8f9fa;
+            border-radius: 0 0 5px 5px;
+        }
+        .announcement-footer button {
+            margin-left: 5px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#home">Home</a>
+        <a href="#announcements">Announcements</a>
+        <a href="#profile">Profile</a>
+        <a href="#settings">Settings</a>
+    </div>
+    <div class="main-content">
+        <h1 class="my-4 text-center">Announcements</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <h2>Announcement Title 1</h2>
+                        <small>Posted on: 2023-10-01</small>
+                    </div>
+                    <div class="announcement-body">
+                        <p>This is the content of the first announcement. It contains important information for all users.</p>
+                    </div>
+                    <div class="announcement-footer">
+                        <button class="btn btn-primary btn-sm">View</button>
+                        <button class="btn btn-secondary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <h2>Announcement Title 2</h2>
+                        <small>Posted on: 2023-10-02</small>
+                    </div>
+                    <div class="announcement-body">
+                        <p>This is the content of the second announcement. It contains important information for all users.</p>
+                    </div>
+                    <div class="announcement-footer">
+                        <button class="btn btn-primary btn-sm">View</button>
+                        <button class="btn btn-secondary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add more rows with two columns as needed -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll('.announcement-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('show');
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

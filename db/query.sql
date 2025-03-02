@@ -46,13 +46,14 @@ create table administrator(
 
 create table announcement(
 	announcement_id int primary key not null auto_increment,
-    admin_id int,
-    cmp_id int,
+    admin_id int not null,
+    cmp_id int not null,
     job_role varchar(255),
-    salry_pkg varchar(10),
-    date_of_visit date,
-    venue varchar(255),
+    salary_pkg varchar(10),
+    date_of_visit date not null,
+    venue varchar(255) not null,
     message text,
+    post_date timestamp default current_timestamp not null,
     foreign key (cmp_id) references company(cmp_id),
     foreign key (admin_id) references administrator(admin_id)
 );
@@ -118,3 +119,23 @@ insert into student values
 (209, 'krisnan', 1, 'B', '2003-10-18', '9586452135', 'krisnan@gmail.com', '2022', 'UG'),
 (210, 'monish', 1, 'B', '2003-10-18', '8564521359', 'monish@gmail.com', '2022', 'UG');
 
+-- Inserting company details
+insert into company values
+(1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai'),
+(2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai'),
+(3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai'),
+(4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai'),
+(5, 'SPIC', 'spic@gmail.com', 'chymistry', 'chennai');
+
+-- Inserting admin 
+insert into administrator values
+(1, 'admin1', '9867032530', 'admin1@gmail.com'),
+(2, 'admin2', '9867032503', 'admin2@gmail.com');
+
+-- Inserting announcements 
+insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pkg, date_of_visit, venue, message) values
+(1, 1, 1, 'Front-end web developer', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
+(2, 1, 1, 'Back-end web developer', '4.5LPA', '2025-03-02', 'Madurai', 'Demo Message'),
+(3, 1, 2, 'Worker', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
+(4, 1, 3, 'Sales', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
+(5, 1, 5, 'Production', '3LPA', '2025-03-02', 'Madurai', 'Demo Message');
