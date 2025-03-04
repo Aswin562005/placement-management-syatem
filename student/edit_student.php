@@ -21,11 +21,11 @@
                         <select name="department_id" class="form-control" id="editDepartment" required>
                             <option value="">Select Department</option>
                             <?php
-                            $dept_query = "SELECT * FROM department";
-                            $dept_result = $conn->query($dept_query);
-                            while ($dept = $dept_result->fetch_assoc()) {
-                                echo "<option value='{$dept['dept_id']}'>{$dept['dept_name']}</option>";
-                            }
+                                $dept_query = "SELECT * FROM department";
+                                $dept_result = $conn->query($dept_query);
+                                while ($dept = $dept_result->fetch_assoc()) {
+                                    echo "<option value='{$dept['dept_id']}'>{$dept['dept_name']}</option>";
+                                }
                             ?>
                         </select>
                     </div>

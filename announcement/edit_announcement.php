@@ -1,19 +1,18 @@
-
-<!-- Add Announcement Modal -->
-<div class="modal fade" id="addAnnouncementModal" tabindex="-1">
+<div class="modal fade" id="editAnnouncementModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Post Announcement</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title" id="editAnnouncementModalLabel">Edit Announcement</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addAnnouncementForm">
-                    <input type="hidden" name="action" value="add">
-                    <input type="hidden" name="admin_id" value="1">
+                <form id="editAnnouncementForm">
+                    <input type="hidden" name="action" value="edit">
+                    <input type="hidden" class="form-control" name="id" id="editID">
+                    <input type="hidden" class="form-control" name="admin_id" id="editAdminID">
                     <div class="mb-3">
                         <label>Company</label>
-                        <select name="company_id" class="form-control" required>
+                        <select name="company_id" class="form-control" id="editCompany" required>
                             <option value="">Select Company</option>
                             <?php
                                 $cmp_query = "SELECT * FROM company";
@@ -26,25 +25,25 @@
                     </div>
                     <div class="mb-3">
                         <label>Date of visit</label>
-                        <input type="date" name="date_of_visit" class="form-control" required>
+                        <input type="date" name="date_of_visit" class="form-control" id="editDateOfVisit" required>
                     </div>
                     <div class="mb-3">
                         <label>venue</label>
-                        <input type="text" name="venue" class="form-control" required>
+                        <input type="text" name="venue" class="form-control" id="editVenue" required>
                     </div>
                     <div class="mb-3">
                         <label>Job Role</label>
-                        <input type="text" name="job_role" class="form-control">
+                        <input type="text" name="job_role" class="form-control" id="editJobRole">
                     </div>
                     <div class="mb-3">
                         <label>Salary Package</label>
-                        <input type="text" name="salary_pkg" class="form-control">
+                        <input type="text" name="salary_pkg" class="form-control" id="editSalaryPkg">
                     </div>
                     <div class="mb-3">
                         <label>Other Description</label>
-                        <textarea name="description" class="form-control"></textarea>
+                        <textarea name="description" class="form-control" id="editDescription"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
         </div>
