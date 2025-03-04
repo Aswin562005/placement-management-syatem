@@ -22,10 +22,13 @@ create table student(
     dept_id int,
     stu_section enum('A', 'B', 'C', 'D') default 'A',
     stu_dob date,
+    stu_gender varchar(10),
+    stu_address varchar(255),
     stu_mobileno varchar(15),
     stu_email varchar(225) unique,
     stu_batch varchar(50),
     ug_or_pg enum('UG', 'PG'),
+   
     foreign key (dept_id) references department(dept_id)
 );
 
@@ -34,7 +37,8 @@ create table company(
     cmp_name varchar(255) not null,
     cmp_email varchar(255) unique not null,
     cmp_industry varchar(255) not null,
-    cmp_location varchar(255) not null
+    cmp_location varchar(255) not null,
+    cmp_website varchar(255)
 );
 
 create table administrator(
@@ -109,23 +113,23 @@ insert into department values
 
 -- Inserting student details
 insert into student values
-(201, 'dharun', 1, 'B', '2003-10-18', '9856452135', 'dharun@gmail.com', '2022', 'UG'),
-(202, 'dhina', 1, 'B', '2003-10-18', '9856451235', 'dhina@gmail.com', '2022', 'UG'),
-(203, 'gokul', 1, 'B', '2003-10-18', '9856452153', 'gokul@gmail.com', '2022', 'UG'),
-(205, 'hari', 1, 'B', '2003-10-18', '9854652135', 'hari@gmail.com', '2022', 'UG'),
-(206, 'kabil', 1, 'B', '2003-10-18', '8956452135', 'kabil@gmail.com', '2022', 'UG'),
-(207, 'karthickraja', 1, 'B', '2003-10-18', '9856425135', 'karthickraja@gmail.com', '2022', 'UG'),
-(208, 'karthickeyan', 1, 'B', '2003-10-18', '9854652135', 'karthickeyan@gmail.com', '2022', 'UG'),
-(209, 'krisnan', 1, 'B', '2003-10-18', '9586452135', 'krisnan@gmail.com', '2022', 'UG'),
-(210, 'monish', 1, 'B', '2003-10-18', '8564521359', 'monish@gmail.com', '2022', 'UG');
+(201, 'dharun', 1, 'B', '2003-10-18','Male','Thirumangalam' ,'9856452135', 'dharun@gmail.com', '2022', 'UG'),
+(202, 'dhina', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856451235', 'dhina@gmail.com', '2022', 'UG'),
+(203, 'gokul', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9856452153', 'gokul@gmail.com', '2022', 'UG'),
+(205, 'hari', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9854652135', 'hari@gmail.com', '2022', 'UG'),
+(206, 'kabil', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8956452135', 'kabil@gmail.com', '2022', 'UG'),
+(207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG'),
+(208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG'),
+(209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG'),
+(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG');
 
 -- Inserting company details
 insert into company values
-(1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai'),
-(2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai'),
-(3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai'),
-(4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai'),
-(5, 'SPIC', 'spic@gmail.com', 'chymistry', 'chennai');
+(1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai','https//www.tcs.com'),
+(2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai','https//www.cvp.com'),
+(3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai','https//www.kgis.com'),
+(4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai','https//www.zoho.com'),
+(5, 'SPIC', 'spic@gmail.com', 'chymistry', 'chennai','https//www.SPIC.com');
 
 -- Inserting admin 
 insert into administrator values

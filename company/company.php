@@ -29,7 +29,7 @@
                 $result = $conn->query($sql);
 
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr data-cmp-name='{$row['cmp_name']}' data-cmp-email='{$row['cmp_email']}' data-cmp-industry='{$row['cmp_industry']}' data-cmp-location='{$row['cmp_location']}'>
+                    echo "<tr data-cmp-name='{$row['cmp_name']}' data-cmp-email='{$row['cmp_email']}' data-cmp-industry='{$row['cmp_industry']}' data-cmp-location='{$row['cmp_location']}' data-cmp-website='{$row['cmp_website']}'>
                             <td>{$row['cmp_id']}</td>
                             <td>{$row['cmp_name']}</td>
                             <td>{$row['cmp_email']}</td>
@@ -96,6 +96,7 @@
                 $("#editIndustry").val(row.attr("data-cmp-industry"));
                 $("#editEmail").val(row.attr("data-cmp-email"));
                 $("#editLocation").val(row.attr("data-cmp-location"));
+                $("#editWebsite").val(row.attr("data-cmp-website"));
 
                 $("#editCompanyModal").modal("show");
             });

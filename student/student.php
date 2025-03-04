@@ -105,6 +105,8 @@
                     $("#editEmail").val(row.attr("data-email"));
                     $("#editPhone").val(row.attr("data-phone"));
                     $("#editDob").val(row.attr("data-dob"));
+                    $("#editGender").val(row.attr("data-gender"));
+                    $("#editAddress").val(row.attr("data-address"));
                     $("#editYearOfStudy").val(row.attr("data-year-of-study"));
                     $(`input[name='ug_or_pg'][value='${row.attr("data-ug-or-pg")}']`).prop('checked', true);
 

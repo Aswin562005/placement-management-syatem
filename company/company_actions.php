@@ -15,14 +15,15 @@ function handle_add($conn) {
     $email = validate_input($_POST['email']);
     $industry = validate_input($_POST['industry']);
     $location = validate_input($_POST['location']);
+    $website = validate_input($_POST['website']);
 
-    $sql = "INSERT INTO company (cmp_name, cmp_email, cmp_industry, cmp_location) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO company (cmp_name, cmp_email, cmp_industry, cmp_location) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         throw new Exception("System error! Please try again later.");
     }
 
-    $stmt->bind_param("ssss", $name, $email, $industry, $location);
+    $stmt->bind_param("sssss", $name, $email, $industry, $location, $website);
 
     if ($stmt->execute()) {
         respond("success", "Company added successfully!");
@@ -46,6 +47,7 @@ function handle_view($conn) {
         <p><strong>Company Email : </strong> {$row['cmp_email']}</p>
         <p><strong>Industry : </strong> {$row['cmp_industry']}</p>
         <p><strong>Location : </strong> {$row['cmp_location']}</p>
+        <p><strong>Website : </strong> {$row['cmp_website']}</p>
     ";
     $stmt->close();
 }
@@ -56,14 +58,16 @@ function handle_edit($conn) {
     $email = validate_input($_POST['email']);
     $industry = validate_input($_POST['industry']);
     $location = validate_input($_POST['location']);
+    $website = validate_input($_POST['website']);
+    
 
-    $sql = "UPDATE company SET cmp_name = ?, cmp_email = ?, cmp_industry = ?, cmp_location = ? WHERE cmp_id = ?";
+    $sql = "UPDATE company SET cmp_name = ?, cmp_email = ?, cmp_industry = ?, cmp_location = ?, cmp_website = ? WHERE cmp_id = ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         throw new Exception("System error! Please try again later.");
     }
 
-    $stmt->bind_param("ssssi", $name, $email, $industry, $location, $id);
+    $stmt->bind_param("sssssi", $name, $email, $industry, $location, $website ,$id);
 
     if ($stmt->execute()) {
         if ($stmt->affected_rows > 0) {

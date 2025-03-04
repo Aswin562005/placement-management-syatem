@@ -55,13 +55,17 @@
                         <input type="date" name="dob" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label>Gender</label>
-                        <select name="gender" class="form-control" required>
+                        <label class="form-label">Gender</label>
+                        <select name="gender" class="form-control" id="editGender" required>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
-                            <option value="Other">Other</option>
+                            <!-- <option value="Other">Other</option> -->
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control" id="editAddress" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label>Year of Study(Batch)</label>
