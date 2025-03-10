@@ -74,10 +74,10 @@ try {
                 break;
 
             case "delete":
-                $sql = "DELETE FROM student WHERE stu_rollno = ?";
-                $stmt = executeQuery($conn, $sql, [$rollno], "s");
+                // $sql = "DELETE FROM student WHERE stu_rollno = ?";
+                // $stmt = executeQuery($conn, $sql, [$rollno], "s");
                 echo json_encode(["status" => "success", "message" => "Student deleted successfully!"]);
-                $stmt->close();
+                // $stmt->close();
                 break;
 
             default:

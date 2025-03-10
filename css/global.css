@@ -69,7 +69,7 @@ table {
 }
 th, td {
     padding: 12px;
-    text-align: left;
+    text-align: center !important;
     border-bottom: 1px solid #ddd;
 }
 th {

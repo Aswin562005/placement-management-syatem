@@ -8,5 +8,5 @@
         <li><a href="/placementManagementSystem/announcement/announcement.php">Announcements</a></li>
         <li><a href="#">Reports</a></li>
     </ul>
-    <a href="#" class="logout">Logout</a>
+    <a href="/placementManagementSystem/auth/logout.php" class="logout">Logout</a>
 </div>

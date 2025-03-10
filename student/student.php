@@ -18,13 +18,36 @@
             <!-- Alert Box for Messages -->
             <div id="messageBox" class="alert d-none my-3"></div>
 
-            <table>
+            <!-- Filtering Student -->
+            <label>Filter by Department and Section : 
+                <select name="departmentFilter">
+                    <option value="">Select Department</option>
+                    <?php
+                        $dept_query = "SELECT * FROM department";
+                        $dept_result = $conn->query($dept_query);
+                        while ($dept = $dept_result->fetch_assoc()) {
+                            echo "<option value='{$dept['dept_name']}'>{$dept['dept_name']}</option>";
+                        }
+                    ?>
+                </select>
+                <select name="sectionFilter">
+                    <option value="">Select Section</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </label>
+            <!-- End Filtering Student -->
+
+            <!-- Student Table -->
+            <table id="studentTable">
                 <thead>
                     <tr>
                         <th>Rollno</th>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Department</th>
+                        <th>Section</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,8 +60,8 @@
                         echo "<tr data-name='{$row['stu_name']}' data-email='{$row['stu_email']}' data-phone='{$row['stu_mobileno']}' data-dept-id='{$row['dept_id']}' data-section='{$row['stu_section']}' data-dob='{$row['stu_dob']}' data-year-of-study='{$row['stu_batch']}' data-ug-or-pg='{$row['ug_or_pg']}'>
                                 <td>{$row['stu_rollno']}</td>
                                 <td>{$row['stu_name']}</td>
-                                <td>{$row['stu_email']}</td>
                                 <td>{$row['dept_name']}</td>
+                                <td>{$row['stu_section']}</td>
                                 <td class='actions'>
                                     <button class='btn btn-sm btn-info view-btn' data-id='{$row['stu_rollno']}'>View</button>
                                     <button class='btn btn-sm edit-btn btn-warning' data-id='{$row['stu_rollno']}'>Edit</button>
@@ -49,12 +72,27 @@
                     ?>
                 </tbody>
             </table>
+            <!-- End Student Table -->
+
         </div>
 
         <script src="../js/bootstrap/bootstrap.min.js"></script>
         <!-- JavaScript -->
         <script>
             $(document).ready(function () {
+                var studentTable = $("#studentTable").DataTable({
+                    columnDefs: [
+                        {
+                            targets: [2, 3, 4],
+                            orderable: false
+                        },
+                        {
+                            target: 4,
+                            searchable: false,
+                        }
+                    ]
+                });
+
                 function handleFormSubmit(formId, url, modalId) {
                     $(formId).submit(function (e) {
                         e.preventDefault();
@@ -90,6 +128,7 @@
                 });
 
                 handleButtonClick(".delete-btn", "delete", function (response) {
+                    console.dir(response)
                     alert(response);
                     location.reload();
                 });

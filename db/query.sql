@@ -60,7 +60,7 @@ create table announcement(
 
 create table users(
 	email varchar(255),
-    password varchar(255),
+    password_ varchar(255),
     type_of_user enum('admin', 'faculty', 'student') default 'student'
 );
 

@@ -1,10 +1,10 @@
 <?php include '../include/checksession.php'; ?>
 <?php 
-    if($_SESSION['user_type'] != 'admin')
+    if($_SESSION['user_type'] != 'student')
     {
         header("location: ../auth/index.php");
         exit;
-    }   
+    }
 ?>
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
         <header>
             <h1>Dashboard</h1>
             <div class="header-right">
-                <span>Welcome, Admin</span>
+                <span>Welcome, Student</span>
                 <button id="theme-toggle">Toggle Theme</button>
             </div>
         </header>
@@ -53,4 +53,3 @@
     </div>
     <script src="../js/global.js"></script>
 </body>
-</html>

@@ -13,10 +13,11 @@
             <h1>Companies</h1>
             <button class="add-btn" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Add Company</button>
         </header>
-        <table>
+        <table id="companyTable">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
+                    <th>Company ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Industry</th>
@@ -27,9 +28,11 @@
                 <?php
                 $sql = "SELECT * FROM company;";
                 $result = $conn->query($sql);
+                $count = 1;
 
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr data-cmp-name='{$row['cmp_name']}' data-cmp-email='{$row['cmp_email']}' data-cmp-industry='{$row['cmp_industry']}' data-cmp-location='{$row['cmp_location']}'>
+                            <td>{$count}</td>
                             <td>{$row['cmp_id']}</td>
                             <td>{$row['cmp_name']}</td>
                             <td>{$row['cmp_email']}</td>
@@ -40,6 +43,7 @@
                                 <button class='btn btn-sm btn-danger delete-btn' data-id='{$row['cmp_id']}'>Delete</button>
                             </td>
                         </tr>";
+                    $count++;
                 }
                 ?>
             </tbody>
@@ -48,6 +52,19 @@
 
     <script>
         $(document).ready(function () {
+            $("#companyTable").DataTable({
+                    columnDefs: [
+                        {
+                            targets: [3, 4, 5],
+                            orderable: false
+                        },
+                        {
+                            target: 5,
+                            searchable: false,
+                        }
+                    ]
+                });
+
             function handleFormSubmit(formId, url, modalId) {
                 $(formId).submit(function (e) {
                     e.preventDefault();

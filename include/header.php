@@ -7,4 +7,6 @@
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/sidebar.css" />
     <script src="../js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../css/DataTables/datatables.min.css">
+    <script src="../js/DataTables/datatables.min.js"></script>
 </head>
