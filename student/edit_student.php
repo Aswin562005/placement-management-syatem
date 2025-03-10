@@ -51,15 +51,19 @@
                         <label class="form-label">Date of Birth</label>
                         <input type="date" name="dob" class="form-control" id="editDob" required>
                     </div>
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label class="form-label">Gender</label>
                         <select name="gender" class="form-control" id="editGender" required>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
-                            <option value="Other">Other</option>
+                            <!-- <option value="Other">Other</option> -->
                         </select>
-                    </div> -->
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control" id="editAddress" required></textarea>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Year of Study(Batch)</label>
                         <input type="number" name="year_of_study" class="form-control" id="editYearOfStudy" required>

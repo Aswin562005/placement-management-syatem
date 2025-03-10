@@ -28,6 +28,10 @@
                         <label class="form-label">Company Location(city)</label>
                         <input type="text" class="form-control" name="location" id="editLocation" required>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Company Website</label>
+                        <input type="url" class="form-control" name="website" id="editWebsite">
+                    </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>

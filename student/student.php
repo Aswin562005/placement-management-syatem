@@ -57,7 +57,7 @@
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
-                        echo "<tr data-name='{$row['stu_name']}' data-email='{$row['stu_email']}' data-phone='{$row['stu_mobileno']}' data-dept-id='{$row['dept_id']}' data-section='{$row['stu_section']}' data-dob='{$row['stu_dob']}' data-year-of-study='{$row['stu_batch']}' data-ug-or-pg='{$row['ug_or_pg']}'>
+                        echo "<tr data-name='{$row['stu_name']}' data-email='{$row['stu_email']}' data-phone='{$row['stu_mobileno']}' data-gender='{$row['stu_gender']}' data-address='{$row['stu_address']}' data-dept-id='{$row['dept_id']}' data-section='{$row['stu_section']}' data-dob='{$row['stu_dob']}' data-year-of-study='{$row['stu_batch']}' data-ug-or-pg='{$row['ug_or_pg']}'>
                                 <td>{$row['stu_rollno']}</td>
                                 <td>{$row['stu_name']}</td>
                                 <td>{$row['dept_name']}</td>
@@ -144,6 +144,8 @@
                     $("#editEmail").val(row.attr("data-email"));
                     $("#editPhone").val(row.attr("data-phone"));
                     $("#editDob").val(row.attr("data-dob"));
+                    $("#editGender").val(row.attr("data-gender"));
+                    $("#editAddress").val(row.attr("data-address"));
                     $("#editYearOfStudy").val(row.attr("data-year-of-study"));
                     $(`input[name='ug_or_pg'][value='${row.attr("data-ug-or-pg")}']`).prop('checked', true);
 

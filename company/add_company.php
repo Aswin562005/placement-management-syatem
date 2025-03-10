@@ -31,6 +31,11 @@
                         <input type="text" name="location" class="form-control" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label>Comapany Website</label>
+                        <input type="url" name="website" class="form-control">
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Save Company</button>
                 </form>
             </div>
