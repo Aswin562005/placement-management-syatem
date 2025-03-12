@@ -8,5 +8,5 @@
         <li><a href="/placement-management-syatem/announcement/announcement.php">Announcements</a></li>
         <li><a href="#">Reports</a></li>
     </ul>
-    <a href="/placementManagementSystem/auth/logout.php" class="logout">Logout</a>
+    <a href="/placement-management-syatem/auth/logout.php" class="logout">Logout</a>
 </div>

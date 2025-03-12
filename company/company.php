@@ -1,3 +1,11 @@
+<?php include '../include/checksession.php'; ?>
+<?php 
+     if($_SESSION['user_type'] != 'admin')
+     {
+         header("location: ../auth/index.php");
+         exit;
+     }  
+?>
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +15,7 @@
     <?php include 'view_company.php'; ?>
     <?php include 'add_company.php'; ?>
     <?php include 'edit_company.php'; ?>
+    <?php include '../include/loader.php'; ?>
 
     <div class="main-content">
         <header>
@@ -17,7 +26,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Company ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Industry</th>
@@ -32,7 +40,7 @@
 
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr data-cmp-name='{$row['cmp_name']}' data-cmp-email='{$row['cmp_email']}' data-cmp-industry='{$row['cmp_industry']}' data-cmp-location='{$row['cmp_location']}' data-cmp-website='{$row['cmp_website']}'>
-                            <td>{$row['cmp_id']}</td>
+                            <td>{$count}</td>
                             <td>{$row['cmp_name']}</td>
                             <td>{$row['cmp_email']}</td>
                             <td>{$row['cmp_industry']}</td>
@@ -54,11 +62,11 @@
             $("#companyTable").DataTable({
                     columnDefs: [
                         {
-                            targets: [3, 4, 5],
+                            targets: [2, 3, 4],
                             orderable: false
                         },
                         {
-                            target: 5,
+                            target: 4,
                             searchable: false,
                         }
                     ]
@@ -68,18 +76,22 @@
                 $(formId).submit(function (e) {
                     e.preventDefault();
                     let formData = new FormData(document.querySelector(formId));
-
+                    startLoader();
                     fetch(url, {
                         method: "POST",
                         body: formData
                     })
                     .then(response => response.json())
                     .then(data => {
+                        stopLoader();
                         $(modalId).modal("hide");
                         alert(data.message);
                         location.reload();
                     })
-                    .catch(error => console.error("Error:", error));
+                    .catch(error => {
+                        stopLoader();
+                        console.error("Error:", error);
+                    });
                 });
             }
 
@@ -89,16 +101,25 @@
             function handleButtonClick(buttonClass, action, callback) {
                 $(buttonClass).click(function () {
                     let companyId = $(this).data("id");
+                    startLoader();
+                    if (action == "delete") {
+                            if (!confirm('Are you  want to delete this company record ?')) {
+                                stopLoader();
+                                return;
+                            }
+                        }
                     $.post("company_actions.php", { action: action, id: companyId }, callback);
                 });
             }
 
             handleButtonClick(".view-btn", "view", function (data) {
+                stopLoader();
                 $("#companyDetails").html(data);
                 $("#viewCompanyModal").modal("show");
             });
 
             handleButtonClick(".delete-btn", "delete", function (response) {
+                stopLoader();
                 alert(response);
                 location.reload();
             });

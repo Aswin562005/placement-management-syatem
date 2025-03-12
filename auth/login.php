@@ -39,6 +39,7 @@ $(document).ready(function() {
                 if(response.status == 'success') {
                     window.location.href = response.redirect;
                 }
+                location.reload();
             },
             error: function(error) {
                 console.error('Error:', error);

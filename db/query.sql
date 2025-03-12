@@ -45,7 +45,9 @@ create table administrator(
 	admin_id int primary key not null auto_increment,
     admin_name varchar(255) not null,
     admin_mobileno varchar(15) unique,
-    admin_email varchar(255) unique
+    admin_email varchar(255) unique,
+    admin_dob date,
+    admin_gender enum('Male', 'Female', 'Others')
 );
 
 create table announcement(
@@ -126,15 +128,15 @@ insert into student values
 -- Inserting company details
 insert into company values
 (1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai','https//www.tcs.com'),
-(2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai','https//www.cvp.com'),
-(3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai','https//www.kgis.com'),
-(4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai','https//www.zoho.com'),
-(5, 'SPIC', 'spic@gmail.com', 'chymistry', 'chennai','https//www.SPIC.com');
+(2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai','https://www.cvp.com'),
+(3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai','https://www.kgis.com'),
+(4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai','https://www.zoho.com'),
+(5, 'SPIC', 'spic@gmail.com', 'chymistry', 'chennai','https://www.SPIC.com');
 
 -- Inserting admin 
 insert into administrator values
-(1, 'admin1', '9867032530', 'admin1@gmail.com'),
-(2, 'admin2', '9867032503', 'admin2@gmail.com');
+(1, 'admin1', '9867032530', 'admin1@gmail.com', '2025-03-12', 'Male'),
+(2, 'admin2', '9867032503', 'admin2@gmail.com', '2025-03-12', 'Female');
 
 -- Inserting announcements 
 insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pkg, date_of_visit, venue, message) values
@@ -143,3 +145,5 @@ insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pk
 (3, 1, 2, 'Worker', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
 (4, 1, 3, 'Sales', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
 (5, 1, 5, 'Production', '3LPA', '2025-03-02', 'Madurai', 'Demo Message');
+
+-- insert into users values('admin@gmail.com', concat('$', upper(sha1(unhex(sha1('1234'))))), 'admin'); 

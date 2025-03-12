@@ -12,7 +12,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- <?php $title='Register & Login'; include '../include/header.php' ?> -->
+    <?php //$title='Register & Login'; include '../include/header.php' ?>
     <link rel="stylesheet" href="./css/Login.css" />
     <script
      src="https://kit.fontawesome.com/64d58efce2.js"

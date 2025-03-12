@@ -28,12 +28,12 @@ try {
             case "add":
                 $params = [
                     $_POST['rollno'], $_POST['name'], $_POST['email'], $_POST['phone'], 
-                    $_POST['dob'], $_POST['gender'],$_POST['address'],$_POST['department_id'], $_POST['section'], 
+                    $_POST['dob'], $_POST['gender'], $_POST['address'], $_POST['department_id'], $_POST['section'],
                     $_POST['year_of_study'], $_POST['ug_or_pg']
                 ];
-                $sql = "INSERT INTO student (stu_rollno, stu_name, stu_email, stu_mobileno, stu_dob,stu_gender,stu_address, dept_id, stu_section, stu_batch, ug_or_pg)
+                $sql = "INSERT INTO student (stu_rollno, stu_name, stu_email, stu_mobileno, stu_dob, stu_gender, stu_address, dept_id, stu_section, stu_batch, ug_or_pg)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = executeQuery($conn, $sql, $params, "sssssisss");
+                $stmt = executeQuery($conn, $sql, $params, "sssssssisss");
                 echo json_encode(["status" => "success", "message" => "Student added successfully!"]);
                 $stmt->close();
                 break;
@@ -50,24 +50,23 @@ try {
                     <p><strong>Section : </strong> {$row['stu_section']}</p>
                     <p><strong>DOB : </strong> {$row['stu_dob']}</p>
                     <p><strong>Gender : </strong> {$row['stu_gender']}</p>
-                    <p><strong>Address : </strong> {$row['stu_address']}</p>
                     <p><strong>Email : </strong> {$row['stu_email']}</p>
                     <p><strong>Mobileno : </strong> {$row['stu_mobileno']}</p>
+                    <p><strong>Address : </strong> {$row['stu_address']}</p>
                     <p><strong>UG or PG : </strong> {$row['ug_or_pg']}</p>
                     <p><strong>Batch : </strong> {$row['stu_batch']}</p>
-        
                 ";
                 $stmt->close();
                 break;
 
             case "edit":
                 $params = [
-                    $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['dob'],$_POST['gender'],
-                    $_POST['address'], $_POST['department_id'], $_POST['section'], $_POST['year_of_study'], 
+                    $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['dob'], $_POST['gender'], $_POST['address'],
+                    $_POST['department_id'], $_POST['section'], $_POST['year_of_study'], 
                     $_POST['ug_or_pg'], $rollno
                 ];
-                $sql = "UPDATE student SET stu_name=?, stu_email=?, stu_mobileno=?, stu_dob=?, stu_gender=?,stu_address=?, dept_id=?, stu_section=?, stu_batch=?, ug_or_pg=? WHERE stu_rollno=?";
-                $stmt = executeQuery($conn, $sql, $params, "ssssssisss");
+                $sql = "UPDATE student SET stu_name=?, stu_email=?, stu_mobileno=?, stu_dob=?, stu_gender=?, stu_address=? , dept_id=?, stu_section=?, stu_batch=?, ug_or_pg=? WHERE stu_rollno=?";
+                $stmt = executeQuery($conn, $sql, $params, "ssssssissss");
                 if ($stmt->affected_rows > 0) {
                     echo json_encode(["status" => "success", "message" => "Student details updated successfully!"]);
                 } else {
@@ -77,10 +76,10 @@ try {
                 break;
 
             case "delete":
-                // $sql = "DELETE FROM student WHERE stu_rollno = ?";
-                // $stmt = executeQuery($conn, $sql, [$rollno], "s");
+                $sql = "DELETE FROM student WHERE stu_rollno = ?";
+                $stmt = executeQuery($conn, $sql, [$rollno], "s");
                 echo json_encode(["status" => "success", "message" => "Student deleted successfully!"]);
-                // $stmt->close();
+                $stmt->close();
                 break;
 
             default:

@@ -21,11 +21,11 @@
                         <select name="department_id" class="form-control" id="editDepartment" required>
                             <option value="">Select Department</option>
                             <?php
-                                $dept_query = "SELECT * FROM department";
-                                $dept_result = $conn->query($dept_query);
-                                while ($dept = $dept_result->fetch_assoc()) {
-                                    echo "<option value='{$dept['dept_id']}'>{$dept['dept_name']}</option>";
-                                }
+                            $dept_query = "SELECT * FROM department";
+                            $dept_result = $conn->query($dept_query);
+                            while ($dept = $dept_result->fetch_assoc()) {
+                                echo "<option value='{$dept['dept_id']}'>{$dept['dept_name']}</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -52,16 +52,22 @@
                         <input type="date" name="dob" class="form-control" id="editDob" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Gender</label>
-                        <select name="gender" class="form-control" id="editGender" required>
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <!-- <option value="Other">Other</option> -->
-                        </select>
+                        <label>Gender &nbsp;&nbsp;</label>
+                        <label>
+                            <input type="radio" name="gender" value="Male" class="form-radio" required>
+                            &nbsp;Male
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="Female" class="form-radio" required>
+                            &nbsp;Female
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="Others" class="form-radio" required>
+                            &nbsp;Others
+                        </label>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Address</label>
+                        <label>Address</label>
                         <textarea name="address" class="form-control" id="editAddress" required></textarea>
                     </div>
                     <div class="mb-3">

@@ -8,10 +8,10 @@
             <div class="modal-body">
                 <form id="editCompanyForm">
                     <input type="hidden" name="action" value="edit">
-                    <div class="mb-3">
-                        <label class="form-label">Company ID</label>
-                        <input type="text" class="form-control" name="id" id="editID" readonly>
-                    </div>
+                    <!-- <div class="mb-3">
+                        <label class="form-label">Company ID</label> -->
+                        <input type="hidden" class="form-control" name="id" id="editID" readonly>
+                    <!-- </div> -->
                     <div class="mb-3">
                         <label class="form-label">Company Name</label>
                         <input type="text" class="form-control" name="name" id="editName" required>
