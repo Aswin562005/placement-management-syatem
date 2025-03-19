@@ -19,20 +19,23 @@
 </head>
 <body>
     <?php include '../include/sidebar.php'; ?>
-    <?php 
+    <?php  
         $sql = "SELECT 
                     (SELECT COUNT(*) FROM company) AS total_companies, 
-                    (SELECT COUNT(*) FROM student) AS total_students";
+                    (SELECT COUNT(*) FROM student) AS total_students,
+                    (SELECT admin_name FROM administrator WHERE admin_email = '$login_email') AS admin_name
+                ";
         $result = $conn->query($sql);
         $data = $result->fetch_assoc();
         $total_students = $data['total_students'];
         $total_companies = $data['total_companies'];
+        $admin_name = $data['admin_name'];
     ?>
     <div class="main-content">
         <header>
             <h1>Dashboard</h1>
             <div class="header-right">
-                <span>Welcome, Admin</span>
+                <span>Welcome, <?php echo $admin_name; ?></span>
                 <button id="theme-toggle">Toggle Theme</button>
             </div>
         </header>

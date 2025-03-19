@@ -1,3 +1,11 @@
+<?php include '../include/checksession.php'; ?>
+<?php 
+     if($_SESSION['user_type'] != 'admin')
+     {
+         header("location: ../auth/index.php");
+         exit;
+     }  
+?>
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,28 +33,32 @@
                 $result = $conn->query($sql);
 
                 while ($row = $result->fetch_assoc()) {
-                    echo "
-                    <div class='col-6'>
-                        <div class='card announcement-card shadow' data-row='". json_encode($row) ."'>
-                            <div class='card-header announcement-header'>
-                                <h3>{$row['cmp_name']} <span class='fs-5'>( {$row['job_role']} )</span></h3>
-                                <small>Posted on: {$row['post_date']}</small>
-                            </div>
-                            <div class='card-body'>
-                                <p class='card-text'>Date of visit : {$row['date_of_visit']}</p>
-                                <p class='card-text'>Venue : {$row['venue']}</p> " .
-                                ($row['salary_pkg'] ? "<p class='card-text'>Salary Package : {$row['salary_pkg']}</p>" : "") .
-                                ($row['message'] ? "<div class='collapse' id='collapseExample-{$row['announcement_id']}'>
-                                    Description : {$row['message']}
-                                </div>" : "").
-                            "</div>
-                            <div class='card-footer announcement-footer'>".
-                                ($row['message'] ?  "<a data-bs-toggle='collapse' href='#collapseExample-{$row['announcement_id']}' role='button'>More details</a>" : "").
-                                "<button class='btn btn-secondary btn-sm edit-btn' data-id='{$row['announcement_id']}'>Edit</button>
-                                <button class='btn btn-danger btn-sm delete-btn' data-id='{$row['announcement_id']}'>Delete</button>
-                            </div>
-                        </div>
-                    </div>"; 
+                    
+                    echo  "<div class='col-6'>
+                                <div class='card announcement-card shadow' data-row='". json_encode($row) ."'>
+                                    <div class='card-header announcement-header'>
+                                        <h3>{$row['cmp_name']} <span class='fs-5'>( {$row['job_role']} )</span></h3>
+                                        <small>Posted on: {$row['post_date']}</small>
+                                    </div>
+                                    <div class='card-body'>
+                                        <p class='card-text'>Date of visit : {$row['date_of_visit']}</p>
+                                        <p class='card-text'>Venue : {$row['venue']}</p> 
+                                        <p>Eligible Criteria : {$row['eligible_criteria']}</p>" .
+                                        ($row['message'] || $row['salary_pkg'] ? "
+                                            <div class='collapse' id='collapseExample-{$row['announcement_id']}'>".
+                                                ($row['salary_pkg'] ? "<p class='card-text'>Salary Package : {$row['salary_pkg']}</p>" : "") . 
+                                                ($row['message'] ? "<p class='card-text'>Description : {$row['message']}</p>" : "") .
+                                            "</div>" : "").
+                                    "</div>
+                                    <div class='card-footer announcement-footer'>".
+                                    ($row['message'] || $row['salary_pkg'] ? "
+                                            <a data-bs-toggle='collapse' href='#collapseExample-{$row['announcement_id']}' role='button'>More details</a>
+                                        " : "" ).
+                                        "<button class='btn btn-secondary btn-sm edit-btn' data-id='{$row['announcement_id']}'>Edit</button>
+                                        <button class='btn btn-danger btn-sm delete-btn' data-id='{$row['announcement_id']}'>Delete</button>
+                                    </div>
+                                </div>
+                            </div>";
                     
                     /* echo "
                         <div class='col-6'>
@@ -89,41 +101,23 @@
     
     <script>
         $(document).ready(function () {
-            function handleFormSubmit(formId, url, modalId) {
-                $(formId).submit(function (e) {
-                    e.preventDefault();
-                    let formData = new FormData(document.querySelector(formId));
-                    console.log("Handling form submit");
+            new Choices('#choices-multiple', {
+                removeItemButton: true,
+                placeholder: true,
+                placeholderValue: 'Select some options',
+            });
 
-                    fetch(url, {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        $(modalId).modal("hide");
-                        alert(data.message);
-                        location.reload();
-                    })
-                    .catch(error => console.error("Error:", error));
-                });
-            }
+            let editChoices = new Choices('#editEligibleCriteria', {
+                removeItemButton: true,
+                placeholder: true,
+                placeholderValue: 'Select some options',
+            });
 
             handleFormSubmit("#addAnnouncementForm", "Announcement_actions.php", "#addAnnouncementModal");
             handleFormSubmit("#editAnnouncementForm", "Announcement_actions.php", "#editAnnouncementModal");
 
-            function handleButtonClick(buttonClass, action, callback) {
-                $(buttonClass).click(function () {
-                    let AnnouncementId = $(this).data("id");
-                    console.log(AnnouncementId);
-                    if (confirm("Are you sure you want to delete this announcement?")){
-                        $.post("Announcement_actions.php", { action: action, id: AnnouncementId }, callback);
-                    }
-                });
-            }
-
-            handleButtonClick(".delete-btn", "delete", function (response) {
+            handleButtonClick("Announcement_actions.php",".delete-btn", "delete", function (response) {
+                stopLoader();
                 alert(response);
                 location.reload();
             });
@@ -132,12 +126,17 @@
                 let row = $(this).parents(".announcement-card")[0];
                 let data = JSON.parse(row.getAttribute("data-row"));
                 let AnnouncementId = $(this).data("id");
+                let eligible_departments = data.eligible_criteria.split(',');
 
                 $("#editID").val(AnnouncementId);
                 $("#editAdminID").val(data.admin_id);
                 $("#editCompany").val(data.cmp_id);
                 $("#editDateOfVisit").val(data.date_of_visit);
                 $("#editVenue").val(data.venue);
+
+                editChoices.removeActiveItems();
+                editChoices.setChoiceByValue(eligible_departments);
+                
                 $("#editJobRole").val(data.job_role);
                 $("#editSalaryPkg").val(data.salary_pkg);
                 $("#editDescription").val(data.message);

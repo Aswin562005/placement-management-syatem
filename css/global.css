@@ -89,3 +89,7 @@ th {
 .actions button:hover {
     opacity: 0.8;
 }
+.btn-primary{
+    background-color:  #1b4f72 !important;
+    border: 1px solid  #1b4f72 !important;
+}

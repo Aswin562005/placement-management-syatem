@@ -9,21 +9,13 @@
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Students | Placement Cell</title>
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/global.css" />
-        <link rel="stylesheet" href="../css/sidebar.css" />
-        <script src="../js/jquery-3.7.1.min.js"></script>
-    </head>
+    <?php $title='Students'; include '../include/header.php' ?>
+
     <body>
         <?php include '../include/sidebar.php'; ?>
         <?php include 'view_student.php'; ?>
         <?php include 'add_student.php'; ?>
         <?php include 'edit_student.php'; ?>
-        <?php include '../include/loader.php'; ?>
         <div class="main-content">
             <header>
                 <h1>Students</h1>
@@ -33,7 +25,7 @@
             <!-- Alert Box for Messages -->
             <div id="messageBox" class="alert d-none my-3"></div>
 
-            <table>
+            <table id="studentTable">
                 <thead>
                     <tr>
                         <th>Rollno</th>
@@ -70,55 +62,33 @@
         <!-- JavaScript -->
         <script>
             $(document).ready(function () {
-                function handleFormSubmit(formId, url, modalId) {
-                    $(formId).submit(function (e) {
-                        e.preventDefault();
-                        let formData = new FormData(document.querySelector(formId));
-                        startLoader();
-                        fetch(url, {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            stopLoader();
-                            $(modalId).modal("hide");
-                            alert(data.message);
-                            location.reload();
-                        })
-                        .catch(error => {
-                            stopLoader();
-                            console.error("Error:", error);
-                        });
-                    });
-                }
+                
+                $("#studentTable").DataTable({
+                    columnDefs: [
+                        {
+                            targets: [2, 3, 4],
+                            orderable: false
+                        },
+                        {
+                            target: 4,
+                            searchable: false,
+                        }
+                    ]
+                });
 
                 handleFormSubmit("#addStudentForm", "student_actions.php", "#addStudentModal");
                 handleFormSubmit("#editStudentForm", "student_actions.php", "#editStudentModal");
 
-                function handleButtonClick(buttonClass, action, callback) {
-                    $(buttonClass).click(function () {
-                        let studentRollno = $(this).data("id");
-                        startLoader();
-                        if (action == "delete") {
-                            if (!confirm('Are you  want to delete this student record ?')) {
-                                stopLoader();
-                                return;
-                            }
-                        }
-                        $.post("student_actions.php", { action: action, rollno: studentRollno }, callback);
-                    });
-                }
-
-                handleButtonClick(".view-btn", "view", function (data) {
+                handleButtonClick("student_actions.php", ".view-btn", "view", function (data) {
                     stopLoader();
                     $("#studentDetails").html(data);
                     $("#viewStudentModal").modal("show");
                 });
 
-                handleButtonClick(".delete-btn", "delete", function (response) {
+                handleButtonClick("student_actions.php", ".delete-btn", "delete", function (response) {
                     stopLoader();
-                    alert(response);
+                    let data = JSON.parse(response);
+                    alert(data.message);
                     location.reload();
                 });
 

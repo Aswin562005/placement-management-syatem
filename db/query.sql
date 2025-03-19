@@ -58,6 +58,7 @@ create table announcement(
     salary_pkg varchar(10),
     date_of_visit date not null,
     venue varchar(255) not null,
+    eligible_criteria text not null,
     message text,
     post_date timestamp default current_timestamp not null,
     foreign key (cmp_id) references company(cmp_id),
@@ -127,7 +128,7 @@ insert into student values
 
 -- Inserting company details
 insert into company values
-(1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai','https//www.tcs.com'),
+(1, 'TCS', 'tcs@gmail.com', 'Software & hardware', 'chennai','https://www.tcs.com'),
 (2, 'CVP', 'cvp@gmail.com', 'hardware', 'kovai','https://www.cvp.com'),
 (3, 'KGIS', 'kgis@gmail.com', 'non-IT', 'kovai','https://www.kgis.com'),
 (4, 'ZOHO', 'zoho@gmail.com', 'Software', 'chennai','https://www.zoho.com'),
@@ -139,11 +140,13 @@ insert into administrator values
 (2, 'admin2', '9867032503', 'admin2@gmail.com', '2025-03-12', 'Female');
 
 -- Inserting announcements 
-insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pkg, date_of_visit, venue, message) values
-(1, 1, 1, 'Front-end web developer', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
-(2, 1, 1, 'Back-end web developer', '4.5LPA', '2025-03-02', 'Madurai', 'Demo Message'),
-(3, 1, 2, 'Worker', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
-(4, 1, 3, 'Sales', '3LPA', '2025-03-02', 'Madurai', 'Demo Message'),
-(5, 1, 5, 'Production', '3LPA', '2025-03-02', 'Madurai', 'Demo Message');
+insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pkg, date_of_visit, venue, eligible_criteria, message) values
+(1, 1, 1, 'Front-end web developer', '3LPA', '2025-03-02', 'Madurai', 'BCA', 'Demo Message'),
+(2, 1, 1, 'Back-end web developer', '4.5LPA', '2025-03-02', 'Madurai', 'all', 'Demo Message'),
+(3, 1, 2, 'Worker', '3LPA', '2025-03-02', 'Madurai', 'BCA,B.com', 'Demo Message'),
+(4, 1, 3, 'Sales', '3LPA', '2025-03-02', 'Madurai', 'B.com,B.sc(IT)', 'Demo Message'),
+(5, 1, 5, 'Production', '3LPA', '2025-03-02', 'Madurai', 'B.com,B.sc(IT), BBA', 'Demo Message');
 
--- insert into users values('admin@gmail.com', concat('$', upper(sha1(unhex(sha1('1234'))))), 'admin'); 
+insert into users values
+('admin1@gmail.com', '$2y$10$RYzFjnj1fiYIgm1j4JO3BOiP37k10l2StRDsQIGQNYxF61wlruHJC', 'admin'),
+('admin2@gmail.com', '$2y$10$RYzFjnj1fiYIgm1j4JO3BOiP37k10l2StRDsQIGQNYxF61wlruHJC', 'admin'); 

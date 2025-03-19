@@ -1,10 +1,10 @@
-<?php //include '../include/checksession.php'; ?>
+<?php include '../include/checksession.php'; ?>
 <?php 
-    //  if($_SESSION['user_type'] != 'admin')
-    //  {
-    //      header("location: ../auth/index.php");
-    //      exit;
-    //  }  
+    if($_SESSION['user_type'] != 'admin')
+    {
+        header("location: ../auth/index.php");
+        exit;
+    }  
 ?>
 <?php include '../db/config.php'; ?>
 <!DOCTYPE html>
@@ -16,7 +16,6 @@
         <?php include 'view_admin.php'; ?>
         <?php include 'add_admin.php'; ?>
         <?php include 'edit_admin.php'; ?>
-        <?php include '../include/loader.php'; ?>
         <div class="main-content">
             <header>
                 <h1>Admins</h1>
@@ -26,9 +25,10 @@
             <!-- Alert Box for Messages -->
             <div id="messageBox" class="alert d-none my-3"></div>
 
-            <table>
+            <table id="adminTable">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone No</th>
@@ -39,9 +39,11 @@
                     <?php
                     $sql = "SELECT * FROM administrator;";
                     $result = $conn->query($sql);
+                    $count = 1;
 
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr data-name='{$row['admin_name']}' data-email='{$row['admin_email']}' data-phone='{$row['admin_mobileno']}' data-dob='{$row['admin_dob']}' data-gender='{$row['admin_gender']}' >
+                                <td>{$count}</td>
                                 <td>{$row['admin_name']}</td>
                                 <td>{$row['admin_email']}</td>
                                 <td>{$row['admin_mobileno']}</td>
@@ -51,6 +53,7 @@
                                     <button class='btn btn-sm delete-btn btn-danger' data-id='{$row['admin_id']}'>Delete</button>
                                 </td>
                             </tr>";
+                            $count++;
                     }
                     ?>
                 </tbody>
@@ -61,18 +64,32 @@
         <!-- JavaScript -->
         <script>
             $(document).ready(function () {
+                $("#adminTable").DataTable({
+                    columnDefs: [
+                        {
+                            targets: [2, 3, 4],
+                            orderable: false
+                        },
+                        {
+                            target: 4,
+                            searchable: false,
+                        }
+                    ]
+                });
+
                 handleFormSubmit("#addAdminForm", "admin_actions.php", "#addAdminModal");
                 handleFormSubmit("#editAdminForm", "admin_actions.php", "#editAdminModal");
 
-                handleButtonClick(".view-btn", "view", function (data) {
+                handleButtonClick("admin_actions.php", ".view-btn", "view", function (data) {
                     stopLoader();
                     $("#adminDetails").html(data);
                     $("#viewAdminModal").modal("show");
                 });
 
-                handleButtonClick(".delete-btn", "delete", function (response) {
+                handleButtonClick("admin_actions.php", ".delete-btn", "delete", function (response) {
                     stopLoader();
-                    alert(response);
+                    let res = JSON.parse(response);
+                    alert(res.message);
                     location.reload();
                 });
 
@@ -80,9 +97,12 @@
                     let row = $(this).closest("tr");
                     let adminId = $(this).data("id");
 
-                    $("#editRollno").val(adminId);
+                    $("#editID").val(adminId);
                     $("#editName").val(row.attr("data-name"));
-                    
+                    $("#editDob").val(row.attr("data-dob"));
+                    $(`input[name='gender'][value='${row.attr("data-gender")}']`).prop('checked', true);
+                    $("#editEmail").val(row.attr("data-email"));
+                    $("#editPhone").val(row.attr("data-phone"));
                     $("#editAdminModal").modal("show");
                 });
 

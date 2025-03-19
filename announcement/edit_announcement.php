@@ -31,6 +31,21 @@
                         <label>venue</label>
                         <input type="text" name="venue" class="form-control" id="editVenue" required>
                     </div>
+
+                    <div class="mb-3">
+                        <label>Eligible Criteria</label>
+                        <select name="eligible_criteria[]" class="form-control" id="editEligibleCriteria" data-live-search="true" multiple required>
+                            <option value="all">All Department</option>
+                            <?php
+                                $dept_query = "SELECT * FROM department";
+                                $dept_result = $conn->query($dept_query);
+                                while ($dept = $dept_result->fetch_assoc()) {
+                                   echo "<option value='{$dept['dept_name']}'>{$dept['dept_name']}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+
                     <div class="mb-3">
                         <label>Job Role</label>
                         <input type="text" name="job_role" class="form-control" id="editJobRole">

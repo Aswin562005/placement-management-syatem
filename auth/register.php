@@ -23,6 +23,7 @@
 <script>
 $(document).ready(function() {
     $('#signupForm').on('submit', function(event) {
+        startLoader();
         event.preventDefault();
         $.ajax({
             url: 'register_user.php',
@@ -34,11 +35,13 @@ $(document).ready(function() {
             },
             dataType: 'json',  
             success: function(response) {
+                stopLoader();
                 console.log('response : ', response);
                 alert(response.message);
                 location.reload();
             },
             error: function(error) {
+                stopLoader();
                 console.error('Error:', error);
             }
         });

@@ -17,29 +17,21 @@ function handle_add($conn) {
     $location = validate_input($_POST['location']);
     $website = validate_input($_POST['website']);
 
-    $sql = "INSERT INTO company (cmp_name, cmp_email, cmp_industry, cmp_location, cmp_website) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        throw new Exception("System error! Please try again later.");
+    $check_email_query = "SELECT * FROM company WHERE cmp_email = '$email';";
+    if($conn->query($check_email_query)->num_rows > 0){
+        respond('success', 'The Company Email is already exist.');
     }
 
-    $stmt->bind_param("sssss", $name, $email, $industry, $location, $website);
-
-    if ($stmt->execute()) {
+    $sql = "INSERT INTO company (cmp_name, cmp_email, cmp_industry, cmp_location, cmp_website) VALUES ('$name', '$email', '$industry', '$location', '$website');";
+    if ($conn->query($sql)) {
         respond("success", "Company added successfully!");
-    } else {
-        throw new Exception("Unexpected error! Please try again.");
     }
-    $stmt->close();
 }
 
 function handle_view($conn) {
     $id = validate_input($_POST['id']);
-    $view_company_query = "SELECT * FROM company WHERE cmp_id = ?";
-    $stmt = $conn->prepare($view_company_query);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $view_company_query = "SELECT * FROM company WHERE cmp_id = '$id'";
+    $result = $conn->query($view_company_query);
     $row = $result->fetch_assoc();
     echo "
         <p><strong>Company Id : </strong> {$row['cmp_id']}</p>
@@ -49,7 +41,6 @@ function handle_view($conn) {
         <p><strong>Location : </strong> {$row['cmp_location']}</p>
         <p><strong>Website URL : </strong> <a href='{$row['cmp_website']}'>{$row['cmp_name']}</a></p>
     ";
-    $stmt->close();
 }
 
 function handle_edit($conn) {
@@ -59,40 +50,34 @@ function handle_edit($conn) {
     $industry = validate_input($_POST['industry']);
     $location = validate_input($_POST['location']);
     $website = validate_input($_POST['website']);
+
+    $result = $conn->query("SELECT * FROM company WHERE cmp_id='$id';");
+    $row = $result->fetch_assoc();
+    $old_email = $row['cmp_email'];
+    if ($row['cmp_name'] === $name && $old_email === $email && $row['cmp_industry'] === $industry && $row['cmp_location'] === $location && $row['cmp_website'] === $website) {
+        respond('success', 'No changes made.');
+    }
+    if($old_email != $email) {
+        $check_email_query = "SELECT * FROM company WHERE cmp_email = '$email';";
+        $check__email_result = $conn->query($check_email_query);
     
-
-    $sql = "UPDATE company SET cmp_name = ?, cmp_email = ?, cmp_industry = ?, cmp_location = ?, cmp_website = ? WHERE cmp_id = ?";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        throw new Exception("System error! Please try again later.");
-    }
-
-    $stmt->bind_param("sssssi", $name, $email, $industry, $location, $website ,$id);
-
-    if ($stmt->execute()) {
-        if ($stmt->affected_rows > 0) {
-            respond("success", "Company details updated successfully!");
-        } else {
-            throw new Exception("No changes made.");
+        if($check__email_result->num_rows != 0){
+            respond('success', 'The Company Email is already exist.');
         }
-    } else {
-        throw new Exception("Unexpected error! Please try again.");
     }
-    $stmt->close();
+
+    $sql = "UPDATE company SET cmp_name = '$name', cmp_email = '$email', cmp_industry = '$industry', cmp_location = '$location', cmp_website = '$website' WHERE cmp_id = '$id';";
+    if($conn->query($sql)){
+        respond("success", "Comapny Details Updated Successfully.");
+    }
 }
 
 function handle_delete($conn) {
     $id = validate_input($_POST['id']);
-    $sql = "DELETE FROM company WHERE cmp_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-       echo "Company deleted successfully!";
-    } else {
-        throw new Exception("Error: " . $stmt->error);
+    $sql = "DELETE FROM company WHERE cmp_id = '$id'";
+    if ($conn->query($sql)) {
+        respond("success", "Company deleted successfully!");
     }
-    $stmt->close();
 }
 
 try {
@@ -117,7 +102,6 @@ try {
         }
     }
 } catch (Exception $e) {
-    error_log("Error: " . $e->getMessage());
     respond("error", $e->getMessage());
 }
 

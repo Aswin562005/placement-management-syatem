@@ -22,16 +22,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Phone No</label>
-                        <input type="text" name="phone" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
                         <label>Gender &nbsp;&nbsp;</label>
                         <label>
                             <input type="radio" name="gender" value="Male" class="form-radio" required>
@@ -45,6 +35,16 @@
                             <input type="radio" name="gender" value="Others" class="form-radio" required>
                             &nbsp;Others
                         </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Phone No</label>
+                        <input type="number" name="phone" class="form-control" required>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Save Admin</button>

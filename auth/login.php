@@ -24,6 +24,7 @@
 $(document).ready(function() {
     $('#loginForm').on('submit', function(event) {
         event.preventDefault();
+        startLoader();
         $.ajax({
             url: 'login_check.php',
             type: 'POST',
@@ -34,6 +35,7 @@ $(document).ready(function() {
             },
             dataType: 'json',  
             success: function(response) {
+                stopLoader();
                 console.log('response : ', response);
                 alert(response.message);
                 if(response.status == 'success') {
@@ -42,6 +44,7 @@ $(document).ready(function() {
                 location.reload();
             },
             error: function(error) {
+                stopLoader();
                 console.error('Error:', error);
             }
         });

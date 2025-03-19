@@ -1,6 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION['login_user_email']) || empty($_SESSION['login_user_email']))
+$login_email = $_SESSION['login_user_email'];
+if(!isset($login_email) || empty($login_email))
 {
     header("location: ../auth/index.php");
     exit;

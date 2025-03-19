@@ -15,7 +15,6 @@
     <?php include 'view_company.php'; ?>
     <?php include 'add_company.php'; ?>
     <?php include 'edit_company.php'; ?>
-    <?php include '../include/loader.php'; ?>
 
     <div class="main-content">
         <header>
@@ -72,53 +71,53 @@
                     ]
                 });
 
-            function handleFormSubmit(formId, url, modalId) {
-                $(formId).submit(function (e) {
-                    e.preventDefault();
-                    let formData = new FormData(document.querySelector(formId));
-                    startLoader();
-                    fetch(url, {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        stopLoader();
-                        $(modalId).modal("hide");
-                        alert(data.message);
-                        location.reload();
-                    })
-                    .catch(error => {
-                        stopLoader();
-                        console.error("Error:", error);
-                    });
-                });
-            }
+            // function handleFormSubmit(formId, url, modalId) {
+            //     $(formId).submit(function (e) {
+            //         e.preventDefault();
+            //         let formData = new FormData(document.querySelector(formId));
+            //         startLoader();
+            //         fetch(url, {
+            //             method: "POST",
+            //             body: formData
+            //         })
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             stopLoader();
+            //             $(modalId).modal("hide");
+            //             alert(data.message);
+            //             location.reload();
+            //         })
+            //         .catch(error => {
+            //             stopLoader();
+            //             console.error("Error:", error);
+            //         });
+            //     });
+            // }
 
             handleFormSubmit("#addCompanyForm", "company_actions.php", "#addCompanyModal");
             handleFormSubmit("#editCompanyForm", "company_actions.php", "#editCompanyModal");
 
-            function handleButtonClick(buttonClass, action, callback) {
-                $(buttonClass).click(function () {
-                    let companyId = $(this).data("id");
-                    startLoader();
-                    if (action == "delete") {
-                            if (!confirm('Are you  want to delete this company record ?')) {
-                                stopLoader();
-                                return;
-                            }
-                        }
-                    $.post("company_actions.php", { action: action, id: companyId }, callback);
-                });
-            }
+            // function handleButtonClick(buttonClass, action, callback) {
+            //     $(buttonClass).click(function () {
+            //         let companyId = $(this).data("id");
+            //         startLoader();
+            //         if (action == "delete") {
+            //                 if (!confirm('Are you  want to delete this company record ?')) {
+            //                     stopLoader();
+            //                     return;
+            //                 }
+            //             }
+            //         $.post("company_actions.php", { action: action, id: companyId }, callback);
+            //     });
+            // }
 
-            handleButtonClick(".view-btn", "view", function (data) {
+            handleButtonClick("company_actions.php", ".view-btn", "view", function (data) {
                 stopLoader();
                 $("#companyDetails").html(data);
                 $("#viewCompanyModal").modal("show");
             });
 
-            handleButtonClick(".delete-btn", "delete", function (response) {
+            handleButtonClick("company_actions.php", ".delete-btn", "delete", function (response) {
                 stopLoader();
                 alert(response);
                 location.reload();

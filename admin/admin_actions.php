@@ -23,30 +23,28 @@ function handle_add($conn) {
     $password = hashPassword($dob);
     $type_of_user = 'Admin';
 
-    $insert_administrtor_query = "INSERT INTO administrator (admin_name, admin_email, admin_mobileno, admin_dob, admin_gender) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($insert_administrtor_query);
+    $check_email_query = "SELECT * FROM administrator WHERE admin_email = '$email'";
+    $check__email_result = $conn->query($check_email_query);
 
-    if (!$stmt) {
-        throw new Exception("System error! Please try again later.");
+    if($check__email_result->num_rows != 0){
+        respond('success', 'The Admin Email is already exist.');
     }
 
-    $stmt->bind_param("sssss", $name, $email, $phone, $dob, $gender);
+    $conn->begin_transaction();
 
-    if (!$stmt->execute()) throw new Exception("Unexpected error! Please try again.");
-    
-    $insert_admin_query = "INSERT INTO users (email, password_, type_of_user) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($insert_admin_query);
-
-    if (!$stmt) throw new Exception("System error! Please try again later.");
-
-    $stmt->bind_param("sss", $email, $password, $type_of_user);
-    if($stmt->execute()){
-        respond("success", "Admin created successfully!");
-    } else {
-        throw new Exception("Unexpected error! Please try again.");
+    try {
+        $insert_administrtor_query = "INSERT INTO administrator (admin_name, admin_email, admin_mobileno, admin_dob, admin_gender) VALUES ('$name', '$email', '$phone', '$dob', '$gender')";
+        $add_user_query = "INSERT INTO users VALUES ('$email', '$password', '$type_of_user')";
+        if ($conn->query($insert_administrtor_query)) {
+            if($conn->query($add_user_query)){
+                $conn->commit();
+                respond('success', 'Admin added successfully');
+            } 
+        }
+    } catch (Exception $e) {
+        $conn->rollback();
+        respond("error", $e->getMessage());
     }
-
-    $stmt->close();
 }
 
 function handle_view($conn) {
@@ -70,69 +68,69 @@ function handle_view($conn) {
 function handle_edit($conn) {
     $id = validate_input($_POST['id']);
     $name = validate_input($_POST['name']);
+    $dob = validate_input($_POST['dob']);
     $email = validate_input($_POST['email']);
-    $industry = validate_input($_POST['industry']);
-    $location = validate_input($_POST['location']);
-    $website = validate_input($_POST['website']);
+    $phone = validate_input($_POST['phone']);
+    $gender = validate_input($_POST['gender']);
+    $password = hashPassword($dob);
     
+    $fetch_admin_query = "SELECT * FROM administrator WHERE admin_id='$id'";
+    $result_admin = $conn->query($fetch_admin_query);
+    $row = $result_admin->fetch_assoc();
+    $old_admin_email = $row['admin_email'];
 
-    $sql = "UPDATE company SET cmp_name = ?, cmp_email = ?, cmp_industry = ?, cmp_location = ?, cmp_website = ? WHERE cmp_id = ?";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        throw new Exception("System error! Please try again later.");
+    if ($row['admin_name'] === $name && $old_admin_email === $email && $row['admin_mobileno'] ===$phone && $row['admin_gender'] === $gender && $row['admin_dob'] === $dob) {
+        respond('success', 'No changes made.');
     }
-
-    $stmt->bind_param("sssssi", $name, $email, $industry, $location, $website ,$id);
-
-    if ($stmt->execute()) {
-        if ($stmt->affected_rows > 0) {
-            respond("success", "Company details updated successfully!");
-        } else {
-            throw new Exception("No changes made.");
+    if($old_admin_email != $email) {
+        $check_email_query = "SELECT * FROM administrator WHERE admin_email = '$email';";
+        $check__email_result = $conn->query($check_email_query);
+    
+        if($check__email_result->num_rows != 0){
+            respond('success', 'The Admin Email is already exist.');
         }
-    } else {
-        throw new Exception("Unexpected error! Please try again.");
     }
-    $stmt->close();
+    
+    $conn->begin_transaction();
+    
+    try {
+        $update_admin_query = "UPDATE administrator SET admin_name = '$name', admin_email = '$email', admin_dob='$dob', admin_mobileno = '$phone', admin_gender = '$gender' WHERE admin_id = '$id'";
+        $update_user_query = "UPDATE users SET email = '$email', password_ = '$password' WHERE email='$old_admin_email'";
+
+        if ($conn->query($update_admin_query)) {
+            if($conn->query($update_user_query)){
+                $conn->commit();
+                respond('success', 'Admin updeted successfully');
+            } 
+        }
+    } catch (Exception $e) {
+        $conn->rollback();
+        respond("error", $e->getMessage());
+    }
 }
 
 function handle_delete($conn) {
     $id = validate_input($_POST['id']);
 
-    $fetch_admin_query = "SELECT * FROM administrator where admin_id=?";
-    $stmt = $conn->prepare($fetch_admin_query);
+    $fetch_admin_query = "SELECT admin_email FROM administrator where admin_id='$id'";
+    $result_admin = $conn->query($fetch_admin_query);
+    $admin_email = $result_admin->fetch_assoc()['admin_email'];
 
-    if (!$stmt) throw new Exception("System error! Please try again later.");
+    $conn->begin_transaction();
 
-    $stmt->bind_param("s", $id);
-
-    if(!$stmt->execute()) throw new Exception("Unexpected error! Please try again.");
-
-    $result = $stmt->get_result();
-    if($result) {
-        $row = $result->fetch_assoc();
-        if($row) {
-            $delete_user_query = "DELETE FROM users WHERE email=?;";
-            $stmt = $conn->prepare($delete_user_query);
-
-            if (!$stmt) throw new Exception("System error! Please try again later.");
-
-            $stmt->bind_param("s", $row['admin_email']);
-
-            if(!$stmt->execute()) throw new Exception("Unexpected error! Please try again.");
+    try {
+        $delete_user_query = "DELETE FROM users WHERE email='$admin_email';";
+        $delete_admin_query = "DELETE FROM administrator WHERE admin_email='$admin_email';";
+        if ($conn->query($delete_user_query)) {
+            if($conn->query($delete_admin_query)){
+                $conn->commit();
+                respond('success', 'Admin deleted successfully');
+            }
         }
+    } catch (Exception $e) {
+        $conn->rollback();
+        respond("error", $e->getMessage());
     }
-
-    $sql = "DELETE FROM administrator WHERE admin_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-       echo "Admin removed successfully!";
-    } else {
-        throw new Exception("Error: " . $stmt->error);
-    }
-    $stmt->close();
 }
 
 try {
@@ -147,7 +145,7 @@ try {
                 handle_view($conn);
                 break;
             case "edit":
-                // handle_edit($conn);
+                handle_edit($conn);
                 break;
             case "delete":
                 handle_delete($conn);
@@ -157,7 +155,6 @@ try {
         }
     }
 } catch (Exception $e) {
-    error_log("Error: " . $e->getMessage());
     respond("error", $e->getMessage());
 }
 
