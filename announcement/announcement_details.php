@@ -22,12 +22,15 @@
 
         <div class="row">
             <?php
-                $currentMonth = date('m');
-                $currentYear = date('Y');
-                $announcement_query = "SELECT an.*, c.* FROM announcement AS an JOIN company AS c ON an.cmp_id=c.cmp_id WHERE MONTH(an.post_date) = $currentMonth AND YEAR(an.post_date) = $currentYear;";
+                $currentDate = date('Y') . '-' . date('m'). '-' . date('d');
+                $announcement_query = "SELECT an.*, c.* FROM announcement AS an JOIN company AS c ON an.cmp_id=c.cmp_id WHERE date_of_visit >= '$currentDate';";
                 $result = $conn->query($announcement_query);
+                $student_result = $conn->query("SELECT stu_rollno FROM student WHERE stu_email = '$login_email';")->fetch_assoc();
 
-                function displayAnnouncement($row) {
+                function displayAnnouncement($conn, $row, $student_result) {
+                    $query = "SELECT * FROM student_applications WHERE announcement_id = '{$row['announcement_id']}' AND stu_rollno = '{$student_result['stu_rollno']}';";
+                    $result = $conn->query($query);
+
                     return "
                             <div class='col-6'>
                                 <div class='card announcement-card shadow'>
@@ -49,24 +52,25 @@
                                     ($row['message'] || $row['salary_pkg'] ? "
                                             <a data-bs-toggle='collapse' href='#collapseExample-{$row['announcement_id']}' role='button'>More details</a>
                                         " : "" ).
-                                        "<a href='#' class='btn btn-primary btn-sm entroll-btn'>Entroll Now</a>
-                                    </div>
+                                        ($result->num_rows > 0 ? "<a href='#' class='btn btn-primary btn-sm'>Registered</a>"
+                                        :"<a href='/placement-management-syatem/placement/register.php?announcement={$row['announcement_id']}' class='btn btn-primary btn-sm entroll-btn'>Entroll Now</a>"
+                                        ).
+                                    "</div>
                                 </div>
                             </div>";
                 }
 
                 while ($row = $result->fetch_assoc()) {
-                    $fetch_query = "SELECT d.dept_name FROM student AS s JOIN department AS d ON s.dept_id = d.dept_id;";
+                    $fetch_query = "SELECT s.*,d.dept_name FROM student AS s JOIN department AS d ON s.dept_id = d.dept_id WHERE stu_rollno = '{$student_result['stu_rollno']}';";
                     $dept_name = $conn->query($fetch_query)->fetch_assoc()['dept_name'];
                     $eligible_departments = explode(',', $row['eligible_criteria']);
-
+ 
                     for($i=0; $i<count($eligible_departments); $i++){
-                        if(($row['eligible_criteria'] == 'all') || ($dept_name == $eligible_departments[$i])) {
-                            echo displayAnnouncement($row);
+                        if(($eligible_departments[$i] == 'all') || ($dept_name == $eligible_departments[$i])) {
+                            echo displayAnnouncement($conn, $row, $student_result);
                             break; 
                         }
                     }
-
                 }
             ?>
 

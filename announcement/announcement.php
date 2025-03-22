@@ -54,42 +54,12 @@
                                     ($row['message'] || $row['salary_pkg'] ? "
                                             <a data-bs-toggle='collapse' href='#collapseExample-{$row['announcement_id']}' role='button'>More details</a>
                                         " : "" ).
-                                        "<button class='btn btn-secondary btn-sm edit-btn' data-id='{$row['announcement_id']}'>Edit</button>
+                                        "<a class='btn btn-primary btn-sm' href='/placement-management-syatem/placement/student_applications.php?announcement={$row['announcement_id']}'>Student Applications</a>
+                                        <button class='btn btn-secondary btn-sm edit-btn' data-id='{$row['announcement_id']}'>Edit</button>
                                         <button class='btn btn-danger btn-sm delete-btn' data-id='{$row['announcement_id']}'>Delete</button>
                                     </div>
                                 </div>
                             </div>";
-                    
-                    /* echo "
-                        <div class='col-6'>
-                            <div class='accordion announcement-card' id='accordion-{$row['announcement_id']}'>
-                                <div class='accordion-item'>
-                                    <h2 class='accordion-header shadow'>
-                                    <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-{$row['announcement_id']}'>
-                                        {$row['cmp_name']} <span class='fs-5'>( {$row['job_role']} )
-                                    </button>
-                                    </h2>
-                                    <div id='collapse-{$row['announcement_id']}' class='accordion-collapse collapse' data-bs-parent='#accordion-{$row['announcement_id']}'>
-                                        <div class='accordion-body'>
-                                            <div class='card-body'>
-                                                <p class='card-text'>Date of visit : {$row['date_of_visit']}</p>
-                                                <p class='card-text'>Venue : {$row['venue']}</p>
-                                                <p class='card-text'>Venue : {$row['salary_pkg']}</p>
-                                                <div class='collapse' id='collapseExample-{$row['announcement_id']}'>
-                                                    {$row['message']}
-                                                </div>
-                                            </div>
-                                            <div class='card-footer announcement-footer'>
-                                                <a data-bs-toggle='collapse' href='#collapseExample-{$row['announcement_id']}' role='button'>More details</a>
-                                                <button class='btn btn-secondary btn-sm'>Edit</button>
-                                                <button class='btn btn-danger btn-sm'>Delete</button>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    "; */
                 }
             ?>
 

@@ -11,7 +11,7 @@ input {
   font-family: 'Poppins', sans-serif;
 }
 
-.container {
+.containe {
   position: relative;
   width: 100%;
   background-image: url('../../img/nmssvn3.jpeg');
@@ -22,7 +22,7 @@ input {
   overflow: hidden;
 }
 
-.container:before {
+.containe:before {
   content: '';
   position: absolute;
   height: 2000px;
@@ -35,7 +35,7 @@ input {
   border-radius: 50%;
   z-index: 6;
 }
-.container::after{
+.containe::after{
   content: '';
   position: fixed;
   /* top: 0; */
@@ -250,37 +250,37 @@ form.sign-up-form {
 
 /* ANIMATION */
 
-.container.sign-up-mode::before {
+.containe.sign-up-mode::before {
   transform: translate(100%, -50%);
   right: 52%;
 }
 
-.container.sign-up-mode .left-panel .image,
-.container.sign-up-mode .left-panel .content {
+.containe.sign-up-mode .left-panel .image,
+.containe.sign-up-mode .left-panel .content {
   transform: translateX(-800px);
 }
-.container.sign-up-mode .left-panel {
+.containe.sign-up-mode .left-panel {
   pointer-events: none;
 }
-.container.sign-up-mode .right-panel {
+.containe.sign-up-mode .right-panel {
   pointer-events: all;
 }
 
-.container.sign-up-mode .right-panel .image,
-.container.sign-up-mode .right-panel .content {
+.containe.sign-up-mode .right-panel .image,
+.containe.sign-up-mode .right-panel .content {
   transform: translateX(0%);
 }
 
-.container.sign-up-mode .signin-signup {
+.containe.sign-up-mode .signin-signup {
   left: 25%;
 }
 
-.container.sign-up-mode form.sign-in-form {
+.containe.sign-up-mode form.sign-in-form {
   z-index: 1;
   opacity: 0;
 }
 
-.container.sign-up-mode form.sign-up-form {
+.containe.sign-up-mode form.sign-up-form {
   z-index: 2;
   opacity: 1;
 }

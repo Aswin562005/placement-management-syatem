@@ -1,15 +1,16 @@
 use placement;
 
+drop table if exists student_applications;
 drop table if exists student_status;
-drop table if exists student;
-drop table if exists department;
-drop table if exists announcement;
-drop table if exists administrator;
 drop table if exists faculty;
 drop table if exists feedback;
 drop table if exists users;
 drop table if exists placement;
+drop table if exists announcement;
+drop table if exists administrator;
 drop table if exists company;
+drop table if exists student;
+drop table if exists department;
 
 create table department(
 	dept_id int primary key not null auto_increment,
@@ -28,6 +29,7 @@ create table student(
     stu_email varchar(225) unique,
     stu_batch varchar(50),
     ug_or_pg enum('UG', 'PG'),
+    stu_cv varchar(255),
    
     foreign key (dept_id) references department(dept_id)
 );
@@ -104,6 +106,16 @@ create table placement(
     recruited long,
     foreign key (cmp_id) references company(cmp_id)
 );
+create table student_applications(
+	ri_id int primary key not null auto_increment,
+	stu_rollno int not null,
+    stu_mobileno varchar(15),
+    stu_email varchar(225),
+    announcement_id int not null,
+    applied_on timestamp default current_timestamp not null,
+    foreign key (announcement_id) references announcement(announcement_id),
+    foreign key (stu_rollno) references student(stu_rollno)
+);
 
 -- Inserting Department details
 insert into department values 
@@ -116,15 +128,15 @@ insert into department values
 
 -- Inserting student details
 insert into student values
-(201, 'dharun', 1, 'B', '2003-10-18','Male','Thirumangalam' ,'9856452135', 'dharun@gmail.com', '2022', 'UG'),
-(202, 'dhina', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856451235', 'dhina@gmail.com', '2022', 'UG'),
-(203, 'gokul', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9856452153', 'gokul@gmail.com', '2022', 'UG'),
-(205, 'hari', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9854652135', 'hari@gmail.com', '2022', 'UG'),
-(206, 'kabil', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8956452135', 'kabil@gmail.com', '2022', 'UG'),
-(207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG'),
-(208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG'),
-(209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG'),
-(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG');
+(201, 'dharun', 1, 'B', '2003-10-18','Male','Thirumangalam' ,'9856452135', 'dharun@gmail.com', '2022', 'UG',null),
+(202, 'dhina', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856451235', 'dhina@gmail.com', '2022', 'UG',null),
+(203, 'gokul', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9856452153', 'gokul@gmail.com', '2022', 'UG',null),
+(205, 'hari', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9854652135', 'hari@gmail.com', '2022', 'UG',null),
+(206, 'kabil', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8956452135', 'kabil@gmail.com', '2022', 'UG',null),
+(207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG',null),
+(208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG',null),
+(209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG',null),
+(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG',null);
 
 -- Inserting company details
 insert into company values

@@ -10,7 +10,7 @@
                 <li><a href="/placement-management-syatem/student/student.php">Students</a></li>
                 <li><a href="/placement-management-syatem/company/company.php">Companies</a></li>
                 <li><a href="/placement-management-syatem/announcement/announcement.php">Announcements</a></li>
-                <li><a href="#">Reports</a></li>
+                <li><a href="/placement-management-syatem/placement/student_applications.php">Student Applications</a></li>
         <?php } elseif ($_SESSION['user_type'] == 'student') { ?>
                 <li><a href="/placement-management-syatem/student/dashboard.php">Dashboard</a></li>
                 <li><a href="/placement-management-syatem/student/student_personal_details.php">Student</a></li>

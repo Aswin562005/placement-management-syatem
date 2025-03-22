@@ -4,7 +4,7 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: #ecf0f1;
+    background-color: rgb(236, 240, 241);
     color: #2c3e50;
 }
 #theme-toggle {
