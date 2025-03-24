@@ -88,11 +88,6 @@
                             &nbsp;PG
                         </label>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label>Upload CV</label>
-                        <input type="file" name="cv" class="form-control">
-                    </div>
 
                     <button type="submit" class="btn btn-primary">Save Student</button>
                 </form>

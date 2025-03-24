@@ -100,11 +100,24 @@
                 <input type="text" class="form-control" value="<?php echo $row['ug_or_pg']; ?>" readonly>
             </div>
 
+            <form action="student_actions.php" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="hidden" name="action" value="upload_cv">
+                    <input type="hidden" name="rollno" value="<?php echo $row['stu_rollno']; ?>">
+                    <label>Upload CV <?php echo "( "; echo isset($row['stu_cv']) ? $row['stu_cv'] : ""; echo " )";  ?></label>
+                    <input type="file" name="cv" class="form-control" accept=".pdf, .docx" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <?php 
+                    if(isset($row['stu_cv'])){
+                    ?>
+                        <a href="<?php echo $row['stu_cv']; ?>" download class='btn btn-primary'>Download CV</a> 
+                <?php }
+                ?>
+                
+            </form>
         </div>
     </div>
-
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <!-- JavaScript -->
 
 </body>
 

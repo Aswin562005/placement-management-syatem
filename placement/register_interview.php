@@ -12,10 +12,11 @@ function validate_input($data) {
 
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $announcement_id = $_POST['announcement'];
-        $rollno = $_POST['rollno'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
+        $announcement_id = validate_input($_POST['announcement']);
+        $rollno = validate_input($_POST['rollno']);
+        $phone = validate_input($_POST['phone']);
+        $email = validate_input($_POST['email']);
+        $stu_status = 'Pending';
 
         $check_query = "SELECT * FROM student_applications WHERE announcement_id = '$announcement_id' AND stu_rollno = '$rollno';";
         $result = $conn->query($check_query);
@@ -23,7 +24,7 @@ try {
             respond('error', 'You are already Registered for this Interview.');
         }
 
-        $query = "INSERT INTO student_applications (announcement_id, stu_rollno, stu_email, stu_mobileno) VALUES ('$announcement_id', '$rollno', '$email', '$phone');";
+        $query = "INSERT INTO student_applications (announcement_id, stu_rollno, stu_email, stu_mobileno, stu_status) VALUES ('$announcement_id', '$rollno', '$email', '$phone', '$stu_status');";
         if($conn->query($query)){
             respond('success', 'Registered Successfully.');
         }

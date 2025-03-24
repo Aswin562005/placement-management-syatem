@@ -16,6 +16,7 @@
                 <li><a href="/placement-management-syatem/student/student_personal_details.php">Student</a></li>
                 <li><a href="/placement-management-syatem/company/company_details.php">Companies</a></li>
                 <li><a href="/placement-management-syatem/announcement/announcement_details.php">Announcements</a></li>
+                <li><a href="/placement-management-syatem/student/notifications.php">Interview Status</a></li>
         <?php }
         ?>
     </ul>

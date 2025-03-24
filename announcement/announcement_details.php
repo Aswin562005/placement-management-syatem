@@ -64,9 +64,8 @@
                     $fetch_query = "SELECT s.*,d.dept_name FROM student AS s JOIN department AS d ON s.dept_id = d.dept_id WHERE stu_rollno = '{$student_result['stu_rollno']}';";
                     $dept_name = $conn->query($fetch_query)->fetch_assoc()['dept_name'];
                     $eligible_departments = explode(',', $row['eligible_criteria']);
- 
                     for($i=0; $i<count($eligible_departments); $i++){
-                        if(($eligible_departments[$i] == 'all') || ($dept_name == $eligible_departments[$i])) {
+                        if((strtolower($eligible_departments[$i]) == 'all') || (strtolower($dept_name) == strtolower($eligible_departments[$i]))) {
                             echo displayAnnouncement($conn, $row, $student_result);
                             break; 
                         }

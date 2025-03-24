@@ -90,15 +90,6 @@ create table feedback(
     foreign key (cmp_id) references company(cmp_id)
 );
 
-create table student_status(
-	ss_id int primary key not null auto_increment,
-    stu_rollno int,
-    cmp_id int,
-    status enum('Pending', 'Selected', 'Not Selected'),
-    foreign key (stu_rollno) references student(stu_rollno),
-    foreign key (cmp_id) references company(cmp_id)
-);
-
 create table placement(
 	placement_id int primary key not null auto_increment,
     cmp_id int,
@@ -112,6 +103,7 @@ create table student_applications(
     stu_mobileno varchar(15),
     stu_email varchar(225),
     announcement_id int not null,
+    stu_status enum('Pending', 'Selected', 'Not Selected') not null default 'Pending',
     applied_on timestamp default current_timestamp not null,
     foreign key (announcement_id) references announcement(announcement_id),
     foreign key (stu_rollno) references student(stu_rollno)
@@ -136,7 +128,9 @@ insert into student values
 (207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG',null),
 (208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG',null),
 (209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG',null),
-(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG',null);
+(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG',null),
+(101, 'dharun', 3, 'B', '2003-10-18','Male','Thirumangalam' ,'9856352135', 'dharun1@gmail.com', '2022', 'UG',null),
+(102, 'dhina', 3, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856251235', 'dhina2@gmail.com', '2022', 'UG',null);
 
 -- Inserting company details
 insert into company values
@@ -153,11 +147,11 @@ insert into administrator values
 
 -- Inserting announcements 
 insert into announcement (announcement_id, admin_id, cmp_id, job_role, salary_pkg, date_of_visit, venue, eligible_criteria, message) values
-(1, 1, 1, 'Front-end web developer', '3LPA', '2025-03-02', 'Madurai', 'BCA', 'Demo Message'),
-(2, 1, 1, 'Back-end web developer', '4.5LPA', '2025-03-02', 'Madurai', 'all', 'Demo Message'),
-(3, 1, 2, 'Worker', '3LPA', '2025-03-02', 'Madurai', 'BCA,B.com', 'Demo Message'),
-(4, 1, 3, 'Sales', '3LPA', '2025-03-02', 'Madurai', 'B.com,B.sc(IT)', 'Demo Message'),
-(5, 1, 5, 'Production', '3LPA', '2025-03-02', 'Madurai', 'B.com,B.sc(IT), BBA', 'Demo Message');
+(1, 1, 1, 'Front-end web developer', '3LPA', '2025-05-02', 'Madurai', 'BCA', 'Demo Message'),
+(2, 1, 1, 'Back-end web developer', '4.5LPA', '2025-05-02', 'Madurai', 'all', 'Demo Message'),
+(3, 1, 2, 'Worker', '3LPA', '2025-05-02', 'Madurai', 'BCA,B.com', 'Demo Message'),
+(4, 1, 3, 'Sales', '3LPA', '2025-05-02', 'Madurai', 'B.com,B.sc(IT)', 'Demo Message'),
+(5, 1, 5, 'Production', '3LPA', '2025-05-02', 'Madurai', 'B.com,B.sc(IT), BBA', 'Demo Message');
 
 insert into users values
 ('admin1@gmail.com', '$2y$10$RYzFjnj1fiYIgm1j4JO3BOiP37k10l2StRDsQIGQNYxF61wlruHJC', 'admin'),

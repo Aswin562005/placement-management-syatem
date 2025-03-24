@@ -112,6 +112,30 @@ function handle_delete($conn) {
     }
 }
 
+function handle_upload_cv($conn) {
+    $targetDir = 'uploads/';
+    $rollno = validate_input($_POST['rollno']);
+    $cvFileName = basename($_FILES['cv']['name']);
+    $targetFilePath = $targetDir . $cvFileName;
+    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+    if (!empty($_FILES['cv']['name'])) {
+        $allowedTypes = array('pdf', 'docx');
+        if(in_array($fileType, $allowedTypes)){
+            if (move_uploaded_file($_FILES['cv']['tmp_name'], $targetFilePath)) {
+                $query = "UPDATE student SET stu_cv = '$targetFilePath' WHERE stu_rollno = '$rollno';";
+                if($conn->query($query)) {
+                    echo "<script>CV Uploaded Successfully.</script>";
+                    header("location: student_personal_details.php");
+                }
+            } else {
+                echo "Upload Erorr ";
+            }
+        } else {
+            echo "Only Allowed pdf ans doc format.";
+        }
+    }
+}
+
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action = $_POST['action'];
@@ -131,6 +155,10 @@ try {
 
             case "delete":
                 handle_delete($conn);
+                break;
+            
+            case 'upload_cv':
+                handle_upload_cv($conn);
                 break;
 
             default:
