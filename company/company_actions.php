@@ -33,8 +33,8 @@ function handle_view($conn) {
     $view_company_query = "SELECT * FROM company WHERE cmp_id = '$id'";
     $result = $conn->query($view_company_query);
     $row = $result->fetch_assoc();
+    // <p id='cmp_id'><strong>Company Id : </strong> {$row['cmp_id']}</p>
     echo "
-        <p><strong>Company Id : </strong> {$row['cmp_id']}</p>
         <p><strong>Company Name : </strong> {$row['cmp_name']}</p>
         <p><strong>Company Email : </strong> {$row['cmp_email']}</p>
         <p><strong>Industry : </strong> {$row['cmp_industry']}</p>

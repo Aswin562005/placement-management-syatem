@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php $title='Companies'; include '../include/header.php' ?>
+
 <body>
     <?php include '../include/sidebar.php' ?>
     <?php include 'view_company.php'; ?>
@@ -36,7 +37,7 @@
                 $count = 1;
 
                 while ($row = $result->fetch_assoc()) {
-                    echo "<tr data-cmp-name='{$row['cmp_name']}' data-cmp-email='{$row['cmp_email']}' data-cmp-industry='{$row['cmp_industry']}' data-cmp-location='{$row['cmp_location']}' data-cmp-website='{$row['cmp_website']}'>
+                    echo "<tr>
                             <td>{$count}</td>
                             <td>{$row['cmp_name']}</td>
                             <td>{$row['cmp_email']}</td>
