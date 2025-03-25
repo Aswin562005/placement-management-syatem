@@ -39,7 +39,7 @@
 
             <div class="input-group mb-3">
                 <label class="input-group-text">
-                    Department Name : 
+                    Department : 
                 </label>
                 <input type="text" class="form-control" value="<?php echo $row['dept_name']; ?>" readonly>
             </div>

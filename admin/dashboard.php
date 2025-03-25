@@ -49,8 +49,8 @@
                 <p><?php echo $total_companies; ?></p>
             </div>
             <div class="card">
-                <h3>Job Offers</h3>
-                <p>500</p>
+                <h3>Placed Students</h3>
+                <p>50</p>
             </div>
         </div>
     </div>
