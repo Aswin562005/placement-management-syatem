@@ -60,7 +60,7 @@
                             } else if ($row['stu_status'] == 'Selected') {
                                 echo "<div class='alert alert-light border-start-success mt-3'> <span> Selected : </span> {$row['cmp_name']} ( {$row['job_role']} ) and Appilied on : {$row['applied_on']}  </div>";
                             } else {
-                                echo "<div class='alert alert-light border-start-danger mt-3'> <span> Not Selected :</span> {$row['cmp_name']} ( {$row['job_role']} ) and Appilied on : {$row['applied_on']} fgf </div>";
+                                echo "<div class='alert alert-light border-start-danger mt-3'> <span> Not Selected :</span> {$row['cmp_name']} ( {$row['job_role']} ) and Appilied on : {$row['applied_on']} </div>";
                             }
                         }
                     } else {

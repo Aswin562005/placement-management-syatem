@@ -27,45 +27,22 @@ function hashPassword($password) {
 }
 
 function checkStudentEmail($conn, $email_id) {
-  $check_query = "SELECT * FROM student WHERE stu_email = ?";
-  $stmt = $conn->prepare($check_query);
-  if (!$stmt) throw new Exception("System error! Please try again later.");
-  
-  $stmt->bind_param('s', $email_id);
-  if (!$stmt->execute()) {
-    throw new Exception("Unexpected error! Please try again.");
-  }
-
-  $check_result = $stmt->get_result();
+  $check_query = "SELECT * FROM student WHERE stu_email = '$email_id'";
+  $check_result = $conn->query($check_query);
   return $check_result->fetch_assoc();
 }
 
 function checkUserEmail($conn, $email_id) {
-  $check_query = "SELECT * FROM users WHERE email = ?";
-  $stmt = $conn->prepare($check_query);
-  if (!$stmt) throw new Exception("System error! Please try again later.");
-  
-  $stmt->bind_param('s', $email_id);
-  if (!$stmt->execute()) {
-    throw new Exception("Unexpected error! Please try again.");
-  }
-
-  $check_result = $stmt->get_result();
+  $check_query = "SELECT * FROM users WHERE email = '$email_id'";
+  $check_result = $conn->query($check_query);
   return $check_result->fetch_assoc();
 }
 
 function registerUser($conn, $email_id, $password, $type_of_user) {
-  $insert_query = "INSERT INTO users (email, password_, type_of_user) VALUES (?, ?, ?)";
-  $stmt = $conn->prepare($insert_query);
-  if (!$stmt) throw new Exception("System error! Please try again later.");
-  $stmt->bind_param("sss", $email_id, $password, $type_of_user);
-
-  if ($stmt->execute()) {
+  $insert_query = "INSERT INTO users (email, password_, type_of_user) VALUES ('$email_id', '$password', '$type_of_user')";
+  if ($conn->query($insert_query)) {
     respond('Registered Successfully...');
-  } else {
-    throw new Exception("Unexpected error! Please try again.");
   }
-  $stmt->close();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup_user'])) {

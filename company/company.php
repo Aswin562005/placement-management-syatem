@@ -119,7 +119,8 @@
 
             handleButtonClick("company_actions.php", ".delete-btn", "delete", function (response) {
                 stopLoader();
-                alert(response);
+                let data = JSON.parse(response);
+                alert(data.message);
                 location.reload();
             });
 

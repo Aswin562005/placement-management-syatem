@@ -2,10 +2,7 @@ use placement;
 
 drop table if exists student_applications;
 drop table if exists student_status;
-drop table if exists faculty;
-drop table if exists feedback;
 drop table if exists users;
-drop table if exists placement;
 drop table if exists announcement;
 drop table if exists administrator;
 drop table if exists company;

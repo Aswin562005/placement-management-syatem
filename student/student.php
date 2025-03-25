@@ -58,7 +58,6 @@
             </table>
         </div>
 
-        <script src="../js/bootstrap/bootstrap.min.js"></script>
         <!-- JavaScript -->
         <script>
             $(document).ready(function () {
