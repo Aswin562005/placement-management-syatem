@@ -80,20 +80,20 @@
                 handleFormSubmit("#addAdminForm", "admin_actions.php", "#addAdminModal");
                 handleFormSubmit("#editAdminForm", "admin_actions.php", "#editAdminModal");
 
-                handleButtonClick("admin_actions.php", ".view-btn", "view", function (data) {
+                handleButtonClick("admin_actions.php", "#adminTable", ".view-btn", "view", function (data) {
                     stopLoader();
                     $("#adminDetails").html(data);
                     $("#viewAdminModal").modal("show");
                 });
 
-                handleButtonClick("admin_actions.php", ".delete-btn", "delete", function (response) {
+                handleButtonClick("admin_actions.php", "#adminTable", ".delete-btn", "delete", function (response) {
                     stopLoader();
                     let res = JSON.parse(response);
                     alert(res.message);
                     location.reload();
                 });
 
-                $(".edit-btn").click(function() {
+                $("#adminTable").on('click', ".edit-btn",function() {
                     let row = $(this).closest("tr");
                     let adminId = $(this).data("id");
 

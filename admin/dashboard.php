@@ -20,23 +20,26 @@
 <body>
     <?php include '../include/sidebar.php'; ?>
     <?php  
+        $currentYear = date('Y');
         $sql = "SELECT 
                     (SELECT COUNT(*) FROM company) AS total_companies, 
                     (SELECT COUNT(*) FROM student) AS total_students,
+                    (SELECT COUNT(*) FROM student_applications WHERE stu_status = 'Selected') AS total_selected,
                     (SELECT admin_name FROM administrator WHERE admin_email = '$login_email') AS admin_name
                 ";
         $result = $conn->query($sql);
         $data = $result->fetch_assoc();
         $total_students = $data['total_students'];
         $total_companies = $data['total_companies'];
+        $total_selected = $data['total_selected'];
         $admin_name = $data['admin_name'];
     ?>
     <div class="main-content">
         <header>
             <h1>Dashboard</h1>
             <div class="header-right">
-                <span>Welcome, <?php echo $admin_name; ?></span>
-                <button id="theme-toggle">Toggle Theme</button>
+                <span style="padding-right: 10px;">Welcome, <?php echo $admin_name; ?></span>
+                <!-- <button id="theme-toggle">Toggle Theme</button> -->
             </div>
         </header>
         <div class="cards">
@@ -49,8 +52,8 @@
                 <p><?php echo $total_companies; ?></p>
             </div>
             <div class="card">
-                <h3>Job Offers</h3>
-                <p>500</p>
+                <h3>Selected Students in Interview </h3>
+                <p><?php echo $total_selected; ?></p>
             </div>
         </div>
     </div>
