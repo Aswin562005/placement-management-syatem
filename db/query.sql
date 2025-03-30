@@ -70,22 +70,7 @@ create table users(
     type_of_user enum('admin', 'faculty', 'student') default 'student'
 );
 
--- create table faculty(
--- 	faculty_id int primary key not null auto_increment,
---     faculty_name varchar(255) not null,
---     faculty_mobileno varchar(15) unique,
---     faculty_email varchar(255) unique
--- );
 
--- create table feedback(
--- 	fb_id int primary key not null auto_increment,
---     cmp_id int not null,
---     student_knowledge int not null default 0,
---     student_discipline int not null default 0,
---     overall_rating int not null default 0,
---     fb_message varchar(255),
---     foreign key (cmp_id) references company(cmp_id)
--- );
 
 create table placement(
 	placement_id int primary key not null auto_increment,

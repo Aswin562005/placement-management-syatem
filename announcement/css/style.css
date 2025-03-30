@@ -8,10 +8,7 @@
     opacity: 1;
     transform: translateY(0);
 }
-/* .announcement-card:hover {
-    transform: scale(1.02);
-    transition: transform 0.3s ease;
-} */
+
 .announcement-header {
     background-color: #1b4f72;
     color: white;

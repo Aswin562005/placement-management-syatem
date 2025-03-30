@@ -39,7 +39,7 @@
                 <button id="theme-toggle">Toggle Theme</button>
             </div>
         </header>
-        <div class="cards">
+        <!-- <div class="cards">
             <div class="card">
                 <h3>Total Students</h3>
                 <p><?php echo $total_students; ?></p>
@@ -53,7 +53,7 @@
                 <p>500</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <script src="../js/global.js"></script>
 </body>
 </html>
