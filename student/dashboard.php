@@ -20,37 +20,38 @@
 <body>
     <?php include '../include/sidebar.php'; ?>
     <?php 
+        $studentResult = $conn->query("SELECT stu_rollno, stu_name FROM student WHERE stu_email = '$login_email'")->fetch_assoc();
+        $rollno = $studentResult['stu_rollno'];
+        $stu_name = $studentResult['stu_name'];
         $sql = "SELECT 
-                    (SELECT COUNT(*) FROM company) AS total_companies, 
-                    (SELECT COUNT(*) FROM student) AS total_students,
-                    (SELECT stu_name FROM student WHERE stu_email = '$login_email') AS stu_name
-                ";
+                    (SELECT COUNT(*) FROM student_applications WHERE stu_rollno = '$rollno') AS total_interviews, 
+                    (SELECT COUNT(*) FROM student_applications WHERE stu_rollno = '$rollno' AND stu_status = 'Selected') AS offer_received,
+                    (SELECT COUNT(*) FROM student_applications WHERE stu_rollno = '$rollno' AND stu_status = 'Pending') AS pending_interviews";
         $result = $conn->query($sql);
         $data = $result->fetch_assoc();
-        $total_students = $data['total_students'];
-        $total_companies = $data['total_companies'];
-        $stu_name = $data['stu_name'];
+        $total_interviews = $data['total_interviews'];
+        $offer_received = $data['offer_received'];
+        $pending_interviews = $data['pending_interviews'];
     ?>
     <div class="main-content">
         <header>
             <h1>Dashboard</h1>
             <div class="header-right">
-                <span>Welcome, <?php echo $stu_name; ?></span>
-                <button id="theme-toggle">Toggle Theme</button>
+                <span style="padding-right: 10px;">Welcome, <?php echo $stu_name; ?></span>
             </div>
         </header>
         <!-- <div class="cards">
             <div class="card">
-                <h3>Total Students</h3>
-                <p><?php echo $total_students; ?></p>
+                <h3>Number of Interviews Attended</h3>
+                <p><?php echo $total_interviews; ?></p>
             </div>
             <div class="card">
-                <h3>Companies Registered</h3>
-                <p><?php echo $total_companies; ?></p>
+                <h3>Offers Received</h3>
+                <p><?php echo $offer_received; ?></p>
             </div>
             <div class="card">
-                <h3>Job Offers</h3>
-                <p>500</p>
+                <h3>Pending Interviews</h3>
+                <p><?php echo $pending_interviews; ?></p>
             </div>
         </div>
     </div> -->

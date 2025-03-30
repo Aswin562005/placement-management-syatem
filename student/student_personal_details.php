@@ -57,14 +57,13 @@
     }
 </style>
 
-<body>
-    <?php include '../include/sidebar.php'; ?>
+
+    <div?php include '../include/sidebar.php'; ?>
     <div class="main-content">
         <div class="profile-card">
             <div class="profile-header">
                 <h1>Student Profile</h1>
             </div>
-<<<<<<< HEAD
             <div class="input-group mb-3">
                 <label class="input-group-text">Name : </label>
                 <input type="text" class="form-control" value="<?php echo $row['stu_name']; ?>" readonly>
@@ -146,13 +145,12 @@
                     ?>
                         <a href="<?php echo $row['stu_cv']; ?>" download class='btn btn-primary'>Download CV</a> 
                 <?php }
-=======
+
             <div class="profile-body">
                 <?php
                     $sql = "SELECT s.*, d.dept_name FROM student AS s JOIN department AS d ON s.dept_id = d.dept_id WHERE stu_email = '$login_email';";
                     $result = $conn->query($sql);
                     $row = $result->fetch_assoc();
->>>>>>> a229b03607418bfce66338b46da1db3ff090138c
                 ?>
                 <div class="info-group">
                     <label>Roll No:</label>

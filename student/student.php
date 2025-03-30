@@ -78,20 +78,20 @@
                 handleFormSubmit("#addStudentForm", "student_actions.php", "#addStudentModal");
                 handleFormSubmit("#editStudentForm", "student_actions.php", "#editStudentModal");
 
-                handleButtonClick("student_actions.php", ".view-btn", "view", function (data) {
+                handleButtonClick("student_actions.php", "#studentTable", ".view-btn", "view", function (data) {
                     stopLoader();
                     $("#studentDetails").html(data);
                     $("#viewStudentModal").modal("show");
                 });
 
-                handleButtonClick("student_actions.php", ".delete-btn", "delete", function (response) {
+                handleButtonClick("student_actions.php", "#studentTable", ".delete-btn", "delete", function (response) {
                     stopLoader();
                     let data = JSON.parse(response);
                     alert(data.message);
                     location.reload();
                 });
 
-                $(".edit-btn").click(function() {
+                $("#studentTable").on('click', ".edit-btn", function() {
                     let row = $(this).closest("tr");
                     let studentRollno = $(this).data("id");
 

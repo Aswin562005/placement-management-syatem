@@ -39,8 +39,8 @@ function handleFormSubmit(formId, url, modalId) {
     });
 }
 
-function handleButtonClick(url, buttonClass, action, callback) {
-    $(buttonClass).click(function () {
+function handleButtonClick(url, tableID, buttonClass, action, callback) {
+    $(tableID).on('click', buttonClass, function () {
         let Id = $(this).data("id");
         console.log(Id);
         

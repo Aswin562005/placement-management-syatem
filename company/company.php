@@ -59,72 +59,35 @@
     <script>
         $(document).ready(function () {
             $("#companyTable").DataTable({
-                    columnDefs: [
-                        {
-                            targets: [2, 3, 4],
-                            orderable: false
-                        },
-                        {
-                            target: 4,
-                            searchable: false,
-                        }
-                    ]
-                });
-
-            // function handleFormSubmit(formId, url, modalId) {
-            //     $(formId).submit(function (e) {
-            //         e.preventDefault();
-            //         let formData = new FormData(document.querySelector(formId));
-            //         startLoader();
-            //         fetch(url, {
-            //             method: "POST",
-            //             body: formData
-            //         })
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             stopLoader();
-            //             $(modalId).modal("hide");
-            //             alert(data.message);
-            //             location.reload();
-            //         })
-            //         .catch(error => {
-            //             stopLoader();
-            //             console.error("Error:", error);
-            //         });
-            //     });
-            // }
+                columnDefs: [
+                    {
+                        targets: [2, 3, 4],
+                        orderable: false
+                    },
+                    {
+                        target: 4,
+                        searchable: false,
+                    }
+                ]
+            });
 
             handleFormSubmit("#addCompanyForm", "company_actions.php", "#addCompanyModal");
             handleFormSubmit("#editCompanyForm", "company_actions.php", "#editCompanyModal");
 
-            // function handleButtonClick(buttonClass, action, callback) {
-            //     $(buttonClass).click(function () {
-            //         let companyId = $(this).data("id");
-            //         startLoader();
-            //         if (action == "delete") {
-            //                 if (!confirm('Are you  want to delete this company record ?')) {
-            //                     stopLoader();
-            //                     return;
-            //                 }
-            //             }
-            //         $.post("company_actions.php", { action: action, id: companyId }, callback);
-            //     });
-            // }
-
-            handleButtonClick("company_actions.php", ".view-btn", "view", function (data) {
+            handleButtonClick("company_actions.php", "#companyTable", ".view-btn", "view", function (data) {
                 stopLoader();
                 $("#companyDetails").html(data);
                 $("#viewCompanyModal").modal("show");
             });
 
-            handleButtonClick("company_actions.php", ".delete-btn", "delete", function (response) {
+            handleButtonClick("company_actions.php", "#companyTable", ".delete-btn", "delete", function (response) {
                 stopLoader();
                 let data = JSON.parse(response);
                 alert(data.message);
                 location.reload();
             });
 
-            $(".edit-btn").click(function() {
+            $("#companyTable").on('click', ".edit-btn", function() {
                 let row = $(this).closest("tr");
                 let companyId = $(this).data("id");
 

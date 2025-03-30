@@ -83,6 +83,20 @@
                 placeholderValue: 'Select some options',
             });
 
+            function handleButtonClick(url, buttonClass, action, callback) {
+                $(buttonClass).click(function () {
+                    let companyId = $(this).data("id");
+                    startLoader();
+                    if (action == "delete") {
+                            if (!confirm('Are you  want to delete this company record ?')) {
+                                stopLoader();
+                                return;
+                            }
+                        }
+                    $.post(url, { action: action, id: companyId }, callback);
+                });
+            }
+
             handleFormSubmit("#addAnnouncementForm", "Announcement_actions.php", "#addAnnouncementModal");
             handleFormSubmit("#editAnnouncementForm", "Announcement_actions.php", "#editAnnouncementModal");
 
