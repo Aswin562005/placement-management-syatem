@@ -27,6 +27,7 @@ function handle_add($conn) {
     $address = validate_input($_POST['address']);
     $dept = validate_input($_POST['department_id']);
     $section =  validate_input($_POST['section']);
+    $cgpa =  validate_input($_POST['cgpa']);
     $batch = validate_input($_POST['year_of_study']);
     $ug_or_pg = validate_input($_POST['ug_or_pg']);
 
@@ -40,8 +41,8 @@ function handle_add($conn) {
         respond('success', 'The Student Email is already exist.');
     }
     
-    $sql = "INSERT INTO student (stu_rollno, stu_name, stu_email, stu_mobileno, stu_dob, stu_gender, stu_address, dept_id, stu_section, stu_batch, ug_or_pg)
-            VALUES ('$rollno', '$name', '$email', '$phone', '$dob', '$gender', '$address', '$dept', '$section', '$batch', '$ug_or_pg')";
+    $sql = "INSERT INTO student (stu_rollno, stu_name, stu_email, stu_mobileno, stu_dob, stu_gender, stu_address, dept_id, stu_section, cgpa, stu_batch, ug_or_pg)
+            VALUES ('$rollno', '$name', '$email', '$phone', '$dob', '$gender', '$address', '$dept', '$section', '$cgpa','$batch', '$ug_or_pg')";
     if($conn->query($sql)){
         respond("success", "Student added successfully.");
     }
@@ -63,6 +64,7 @@ function handle_view($conn) {
         <p><strong>Email : </strong> {$row['stu_email']}</p>
         <p><strong>Mobileno : </strong> {$row['stu_mobileno']}</p>
         <p><strong>Address : </strong> {$row['stu_address']}</p>
+        <p><strong>CGPA : </strong> {$row['cgpa']}</p>
         <p><strong>UG or PG : </strong> {$row['ug_or_pg']}</p>
         <p><strong>Batch : </strong> {$row['stu_batch']}</p>
     ";
@@ -79,13 +81,14 @@ function handle_edit($conn) {
     $address = validate_input($_POST['address']);
     $dept = validate_input($_POST['department_id']);
     $section =  validate_input($_POST['section']);
+    $cgpa =  validate_input($_POST['cgpa']);
     $batch = validate_input($_POST['year_of_study']);
     $ug_or_pg = validate_input($_POST['ug_or_pg']);
 
     $result = $conn->query("SELECT * FROM student WHERE stu_rollno='$rollno';");
     $row = $result->fetch_assoc();
     $old_email = $row['stu_email'];
-    if ($row['stu_name'] === $name && $old_email === $email && $row['stu_mobileno'] === $phone && $row['stu_dob'] === $dob && $row['stu_gender'] === $gender && $row['stu_address'] === $address && $row['dept_id'] === $dept && $row['stu_section'] === $section && $row['stu_batch'] === $batch && $row['ug_or_pg'] === $ug_or_pg) {
+    if ($row['stu_name'] === $name && $old_email === $email && $row['cgpa'] === $cgpa && $row['stu_mobileno'] === $phone && $row['stu_dob'] === $dob && $row['stu_gender'] === $gender && $row['stu_address'] === $address && $row['dept_id'] === $dept && $row['stu_section'] === $section && $row['stu_batch'] === $batch && $row['ug_or_pg'] === $ug_or_pg) {
         respond('success', 'No changes made.');
     }
     if($old_email != $email) {
@@ -97,7 +100,7 @@ function handle_edit($conn) {
         }
     }
 
-    $sql = "UPDATE student SET stu_name='$name', stu_email='$email', stu_mobileno='$phone', stu_dob='$dob', stu_gender='$gender', stu_address='$address' , dept_id='$dept', stu_section='$section', stu_batch='$batch', ug_or_pg='$ug_or_pg' WHERE stu_rollno='$rollno';";
+    $sql = "UPDATE student SET stu_name='$name', stu_email='$email', stu_mobileno='$phone', stu_dob='$dob', stu_gender='$gender', stu_address='$address', cgpa='$cgpa' , dept_id='$dept', stu_section='$section', stu_batch='$batch', ug_or_pg='$ug_or_pg' WHERE stu_rollno='$rollno';";
     if($conn->query($sql)){
         respond("success", "Student Details Updated Successfully.");
     }

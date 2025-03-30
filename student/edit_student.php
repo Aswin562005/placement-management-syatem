@@ -71,6 +71,10 @@
                         <textarea name="address" class="form-control" id="editAddress" required></textarea>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">CGPA</label>
+                        <input type="number" step="0.01" class="form-control" name="cgpa" id="editCgpa" min="0.0" max="10.0" required>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Year of Study(Batch)</label>
                         <input type="number" name="year_of_study" class="form-control" id="editYearOfStudy" required>
                     </div>
