@@ -24,6 +24,7 @@ create table student(
     stu_address text,
     stu_mobileno varchar(15),
     stu_email varchar(225) unique,
+    cgpa float,
     stu_batch varchar(50),
     ug_or_pg enum('UG', 'PG'),
     stu_cv varchar(255),
@@ -102,17 +103,17 @@ insert into department values
 
 -- Inserting student details
 insert into student values
-(201, 'dharun', 1, 'B', '2003-10-18','Male','Thirumangalam' ,'9856452135', 'dharun@gmail.com', '2022', 'UG',null),
-(202, 'dhina', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856451235', 'dhina@gmail.com', '2022', 'UG',null),
-(203, 'gokul', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9856452153', 'gokul@gmail.com', '2022', 'UG',null),
-(205, 'hari', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9854652135', 'hari@gmail.com', '2022', 'UG',null),
-(206, 'kabil', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8956452135', 'kabil@gmail.com', '2022', 'UG',null),
-(207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG',null),
-(208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG',null),
-(209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG',null),
-(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG',null),
-(101, 'dharun', 3, 'B', '2003-10-18','Male','Thirumangalam' ,'9856352135', 'dharun1@gmail.com', '2022', 'UG',null),
-(102, 'dhina', 3, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856251235', 'dhina2@gmail.com', '2022', 'UG',null);
+(201, 'dharun', 1, 'B', '2003-10-18','Male','Thirumangalam' ,'9856452135', 'dharun@gmail.com', '2022', 'UG',null,7.3),
+(202, 'dhina', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856451235', 'dhina@gmail.com', '2022', 'UG',null,8.2),
+(203, 'gokul', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9856452153', 'gokul@gmail.com', '2022', 'UG',null,6.3),
+(205, 'hari', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9854652135', 'hari@gmail.com', '2022', 'UG',null,5.2),
+(206, 'kabil', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8956452135', 'kabil@gmail.com', '2022', 'UG',null,10.0),
+(207, 'karthickraja', 1, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856425135', 'karthickraja@gmail.com', '2022', 'UG',null,9.8),
+(208, 'karthickeyan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9854652135', 'karthickeyan@gmail.com', '2022', 'UG',null,9.2),
+(209, 'krisnan', 1, 'B', '2003-10-18','Male','Thirumangalam' , '9586452135', 'krisnan@gmail.com', '2022', 'UG',null,8.9),
+(210, 'monish', 1, 'B', '2003-10-18','Male','Thirumangalam' , '8564521359', 'monish@gmail.com', '2022', 'UG',null,6.7),
+(101, 'dharun', 3, 'B', '2003-10-18','Male','Thirumangalam' ,'9856352135', 'dharun1@gmail.com', '2022', 'UG',null,8.3),
+(102, 'dhina', 3, 'B', '2003-10-18', 'Male','Thirumangalam' ,'9856251235', 'dhina2@gmail.com', '2022', 'UG',null,6.5);
 
 -- Inserting company details
 insert into company values

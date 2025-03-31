@@ -16,7 +16,7 @@
 
     <div class="main-content">
         <header>
-            <h1>Report</h1>
+            <h1>Student Report</h1>
         </header>
 
         <div class="row">
