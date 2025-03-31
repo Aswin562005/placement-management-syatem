@@ -52,13 +52,8 @@
                 <p><?php echo $total_companies; ?></p>
             </div>
             <div class="card">
-<<<<<<< HEAD
-                <h3>Placed Students</h3>
-                <p>50</p>
-=======
                 <h3>Selected Students in Interview </h3>
                 <p><?php echo $total_selected; ?></p>
->>>>>>> a229b03607418bfce66338b46da1db3ff090138c
             </div>
         </div>
     </div>

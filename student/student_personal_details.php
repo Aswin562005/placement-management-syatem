@@ -58,7 +58,7 @@
 </style>
 
 
-    <div?php include '../include/sidebar.php'; ?>
+    <?php include '../include/sidebar.php'; ?>
     <div class="main-content">
         <div class="profile-card">
             <div class="profile-header">
@@ -144,72 +144,12 @@
                     if(isset($row['stu_cv'])){
                     ?>
                         <a href="<?php echo $row['stu_cv']; ?>" download class='btn btn-primary'>Download CV</a> 
-                <?php }
+                <?php }?>
 
-            <div class="profile-body">
-                <?php
-                    $sql = "SELECT s.*, d.dept_name FROM student AS s JOIN department AS d ON s.dept_id = d.dept_id WHERE stu_email = '$login_email';";
-                    $result = $conn->query($sql);
-                    $row = $result->fetch_assoc();
-                ?>
-                <div class="info-group">
-                    <label>Roll No:</label>
-                    <input type="text" value="<?php echo $row['stu_rollno']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Name:</label>
-                    <input type="text" value="<?php echo $row['stu_name']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Department Name:</label>
-                    <input type="text" value="<?php echo $row['dept_name']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Section:</label>
-                    <input type="text" value="<?php echo $row['stu_section']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Date Of Birth:</label>
-                    <input type="text" value="<?php echo $row['stu_dob']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Gender:</label>
-                    <input type="text" value="<?php echo $row['stu_gender']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Email ID:</label>
-                    <input type="text" value="<?php echo $row['stu_email']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Mobile No:</label>
-                    <input type="text" value="<?php echo $row['stu_mobileno']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Address:</label>
-                    <input type="text" value="<?php echo $row['stu_address']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>Batch:</label>
-                    <input type="text" value="<?php echo $row['stu_batch']; ?>" readonly>
-                </div>
-                <div class="info-group">
-                    <label>UG or PG:</label>
-                    <input type="text" value="<?php echo $row['ug_or_pg']; ?>" readonly>
-                </div>
-                <form action="student_actions.php" method="post" enctype="multipart/form-data">
-                    <div class="info-group">
-                        <input type="hidden" name="action" value="upload_cv">
-                        <input type="hidden" name="rollno" value="<?php echo $row['stu_rollno']; ?>">
-                        <label>Upload CV <?php echo "( "; echo isset($row['stu_cv']) ? $row['stu_cv'] : ""; echo " )"; ?></label>
-                        <input type="file" name="cv" class="form-control" accept=".pdf, .docx" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                    <?php if(isset($row['stu_cv'])) { ?>
-                        <a href="<?php echo $row['stu_cv']; ?>" download class="btn btn-primary">Download CV</a>
-                    <?php } ?>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+    <?php include '../include/footer.php'; ?>
+          
 </body>
 </html>
