@@ -107,6 +107,10 @@
                     <input type="text" value="<?php echo $row['stu_address']; ?>" readonly>
                 </div>
                 <div class="info-group">
+                    <label>CGPA : </label>
+                    <input type="text" value="<?php echo $row['cgpa'] ? $row['cgpa'] : 0; ?>" readonly>
+                </div>
+                <div class="info-group">
                     <label>Batch:</label>
                     <input type="text" value="<?php echo $row['stu_batch']; ?>" readonly>
                 </div>

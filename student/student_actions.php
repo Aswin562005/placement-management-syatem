@@ -67,7 +67,8 @@ function handle_view($conn) {
         <p><strong>CGPA : </strong> {$row['cgpa']}</p>
         <p><strong>UG or PG : </strong> {$row['ug_or_pg']}</p>
         <p><strong>Batch : </strong> {$row['stu_batch']}</p>
-    ";
+        ". ( $row['stu_cv'] ? "<a href='{$row['stu_cv']}' download class='btn btn-primary'>Download CV</a>" : "" );
+
 }
 
 // Upadate Student

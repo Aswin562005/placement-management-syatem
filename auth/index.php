@@ -19,10 +19,27 @@
      crossorigin="anonymous"></script>
 <script src="../js/jquery-3.7.1.min.js"></script>
 
+<style>
+    .header {
+        background-color: #323145;
+        z-index: 999 !important;
+        position: relative;
+        border-radius: 0;
+        padding: 6px 0;
+    }
+    .header h3{
+        color: whitesmoke;
+        text-align: center;
+        width: 100%;
+    }
+</style>
 
  <body>
     <?php include '../include/loader.php'; ?>
-  <div class="containe">
+    <div class="containe">
+      <header class="header">
+          <h3>Placement Management System</h3>
+      </header>
    <div class="forms-container">
     <div class="signin-signup">
 

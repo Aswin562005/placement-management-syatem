@@ -29,7 +29,7 @@
             <?php
                 $currentMonth = date('m');
                 $currentYear = date('Y');
-                $sql = "SELECT * FROM announcement AS an JOIN company AS c ON an.cmp_id=c.cmp_id  WHERE MONTH(an.post_date) = $currentMonth AND YEAR(an.post_date) = $currentYear;";
+                $sql = "SELECT * FROM announcement AS an JOIN company AS c ON an.cmp_id=c.cmp_id  WHERE MONTH(an.date_of_visit) >= $currentMonth AND YEAR(an.date_of_visit) = $currentYear;";
                 $result = $conn->query($sql);
 
                 while ($row = $result->fetch_assoc()) {

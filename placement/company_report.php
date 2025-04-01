@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $query = "SELECT a.job_role, a.venue, a.date_of_visit, COUNT(*) as TotalRegistered, sum(case when sa.stu_status = 'Selected' then 1 else 0 end) as TotalSelected FROM student_applications as sa JOIN announcement AS a ON sa.announcement_id = a.announcement_id JOIN company AS c ON a.cmp_id = c.cmp_id WHERE c.cmp_id = '{$companyData['cmp_id']}' group by a.date_of_visit, c.cmp_id, a.job_role, a.venue;";
+                        $query = "SELECT a.job_role, a.venue, a.date_of_visit, COUNT(sa.ri_id) as TotalRegistered, sum(case when sa.stu_status = 'Selected' then 1 else 0 end) as TotalSelected FROM student_applications as sa RIGHT JOIN announcement AS a ON sa.announcement_id = a.announcement_id JOIN company AS c ON a.cmp_id = c.cmp_id WHERE c.cmp_id = '{$companyData['cmp_id']}' group by a.date_of_visit, c.cmp_id, a.job_role, a.venue;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                             $count = 1;

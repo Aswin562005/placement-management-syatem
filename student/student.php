@@ -32,6 +32,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Department</th>
+                        <th>CGPA</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@
                                 <td>{$row['stu_name']}</td>
                                 <td>{$row['stu_email']}</td>
                                 <td>{$row['dept_name']}</td>
+                                <td>{$row['cgpa']}</td>
                                 <td class='actions'>
                                     <button class='btn btn-sm btn-info view-btn' data-id='{$row['stu_rollno']}'>View</button>
                                     <button class='btn btn-sm edit-btn btn-warning' data-id='{$row['stu_rollno']}'>Edit</button>
@@ -65,11 +67,11 @@
                 $("#studentTable").DataTable({
                     columnDefs: [
                         {
-                            targets: [2, 3, 4],
+                            targets: [2, 3, 5],
                             orderable: false
                         },
                         {
-                            target: 4,
+                            target: 5,
                             searchable: false,
                         }
                     ]
